@@ -1,81 +1,122 @@
 import requests
 import json
+import time
+from datetime import datetime
 from pathlib import Path
 
-# MODIFY THESE TO SET THE DATE RANGE
-START_DATE = "2020-02-20T14:00:00"
-END_DATE = "2020-02-22T15:00:00"
+START_DATE = "2014-12-31T22:00:00Z" # EARLIEST DATE TO CONTAIN SENSIBLE DATA = 2010-12-31T22:00:00.000Z
+END_DATE = "2020-12-31T22:00:00Z" # LATEST DATE TO CONTAIN SENSIBLE DATA = 2021-05-31T23:59:59
 
-PRECISION = "hour"  # "hour" or "month"
+# The format for parsing and saving timestamps (ISO 8601 UTC)
+DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
+PRECISION = "hour"
 LOCATION = "Oulu_kaupunki" 
+ID = "100000647" 
 
-ID="100000647"  # Oulu city center, change if you want another site
-
-
-# DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
-
-# API URL
 URL = "https://api.oulunliikenne.fi/proxy/graphql"
 
-# EARLIEST DATE TO CONTAIN SENSIBLE DATA
-EARLIEST_DATE = "2010-12-31T22:00:00.000Z"
-
-# LATEST DATE TO CONTAIN SENSIBLE DATA
-LATEST_DATE = "2021-05-31T23:59:59"
-
-# LATEST DATE WITH ANY DATA, LOOKS INCOMPLETE AND OFTER SIMPLY 0s
-LATEST_DATE_WITH_DATA = "2022-07-25T21:00:00.000Z"
-
 def fetchAllEcoCounterSites(id=ID, domain=LOCATION, step=PRECISION, begin=START_DATE, end=END_DATE):
-    constructedQuery = """query GetEcoCounterSiteData {{
-  ecoCounterSiteData(
-    id: "{id}",
-    domain: {domain},
-    step: {step},
-    begin: "{begin}",
-    end: "{end}"
-  ) {{
-    date
-    counts
-  }}
-}}"""
-        
+    start_dt = datetime.strptime(begin, DATE_FORMAT)
+    end_dt = datetime.strptime(end, DATE_FORMAT)
     
-    payload = {"query": constructedQuery.format(id=id, domain=domain, step=step, begin=begin, end=end)}
-    headers = {
-        "Content-Type": "application/json",
-        # Add auth headers here if the API needs them, e.g.:
-        # "Authorization": "Bearer YOUR_TOKEN"
+    all_counts = []
+    current_start = start_dt
+
+    print(f"Starting chunked fetch from {begin} to {end}...")
+
+    while current_start < end_dt:
+        # Move forward by 1 year
+        try:
+            current_end = min(current_start.replace(year=current_start.year + 1), end_dt)
+        except ValueError: # Handle Feb 29 leap year issues
+            current_end = min(current_start.replace(year=current_start.year + 1, day=28), end_dt)
+        
+        start_str = current_start.strftime(DATE_FORMAT)
+        end_str = current_end.strftime(DATE_FORMAT)
+        
+        constructedQuery = """query GetEcoCounterSiteData {{
+          ecoCounterSiteData(
+            id: "{id}",
+            domain: {domain},
+            step: {step},
+            begin: "{begin}",
+            end: "{end}"
+          ) {{
+            date
+            counts
+          }}
+        }}"""
+        
+        payload = {"query": constructedQuery.format(id=id, domain=domain, step=step, begin=start_str, end=end_str)}
+        headers = {"Content-Type": "application/json"}
+
+        print(f"  -> Fetching chunk: {start_str} to {end_str}")
+        
+        r = requests.post(URL, json=payload, headers=headers, timeout=60)
+        r.raise_for_status()
+        
+        data = r.json()
+        if "errors" in data:
+            raise RuntimeError(f"GraphQL errors: {data['errors']}")
+            
+        chunk_data = data["data"]["ecoCounterSiteData"]
+        all_counts.extend(chunk_data)
+        
+        current_start = current_end
+        time.sleep(0.5)
+
+    print(f"Total rows retrieved: {len(all_counts)}")
+    return {"ecoCounterSiteData": all_counts}
+
+from datetime import timedelta
+
+from datetime import timedelta
+
+def storeJson(data):
+    """
+    Converts timestamps to Helsinki Time, adds the 'Z' suffix to match 
+    weather data, and splits data into subfolders.
+    """
+    base_dir = Path(__file__).parent / "data"
+    rows = data["ecoCounterSiteData"]
+    
+    for row in rows:
+        clean_date = row["date"].split('.')[0].replace('Z', '')
+        utc_dt = datetime.strptime(clean_date, "%Y-%m-%dT%H:%M:%S")
+        local_dt = (utc_dt + timedelta(hours=2)).replace(microsecond=0)
+        row["date"] = f"{local_dt.isoformat()}Z" 
+
+    total_rows = len(rows)
+    if total_rows == 0:
+        print("No data found to save.")
+        return
+
+    # 60/20/20 split
+    train_end = int(total_rows * 0.6)
+    val_end = int(total_rows * 0.8)
+
+    splits = {
+        "training": (rows[:train_end], "pedestrians_train.json"),
+        "validation": (rows[train_end:val_end], "pedestrians_val.json"),
+        "testing": (rows[val_end:], "pedestrians_test.json")
     }
 
-    print("Fetching eco counter sites...")
-    r = requests.post(URL, json=payload, headers=headers, timeout=10)
-    r.raise_for_status()  # raises if non-2xx
-    data = r.json()
-
-    # GraphQL returns {"data": {...}, "errors": [...]}
-    if "errors" in data:
-        raise RuntimeError(f"GraphQL errors: {data['errors']}")
-
-    return data["data"]
-
-def storeJson(data, filename=f'{START_DATE}_to_{END_DATE}_{PRECISION}_{LOCATION}_{ID}.json'):
-        # Create rawData/pedestrians directory if it doesn't exist
-    output_dir = Path("rawData") / "pedestrians"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
-    # Extract date portions for filename
-    start_date_str = START_DATE.split('T')[0]
-    end_date_str = END_DATE.split('T')[0]
-    filename = output_dir / f'{start_date_str}_to_{end_date_str}_{PRECISION}_{LOCATION}_{ID}.json'
-    
-    # Save the JSON response to a file
-    with open(filename, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-    
-    print(f"Data successfully saved to {filename}")
+    for folder, (subset, filename) in splits.items():
+        target_dir = base_dir / folder
+        target_dir.mkdir(parents=True, exist_ok=True)
+        
+        file_path = target_dir / filename
+        payload = {"ecoCounterSiteData": subset}
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(payload, f, indent=2, ensure_ascii=False)
+        
+        print(f"Saved {len(subset)} rows to {target_dir.name}/{filename}")
 
 if __name__ == "__main__":
-    eco_counter_sites = fetchAllEcoCounterSites(ID, LOCATION, PRECISION, START_DATE, END_DATE)
-    storeJson(eco_counter_sites)
+    try:
+        eco_counter_sites = fetchAllEcoCounterSites()
+        storeJson(eco_counter_sites)
+    except Exception as e:
+        print(f"An error occurred: {e}")
