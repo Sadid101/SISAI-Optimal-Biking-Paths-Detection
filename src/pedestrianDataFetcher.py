@@ -3,6 +3,7 @@ import json
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
+import sys
 
 START_DATE = "2014-12-31T22:00:00Z" # EARLIEST DATE TO CONTAIN SENSIBLE DATA = 2010-12-31T22:00:00.000Z
 END_DATE = "2020-12-31T22:00:00Z" # LATEST DATE TO CONTAIN SENSIBLE DATA = 2021-05-31T23:59:59
