@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 START_DATE = "2014-12-31T22:00:00Z" # EARLIEST DATE TO CONTAIN SENSIBLE DATA = 2010-12-31T22:00:00.000Z
@@ -19,80 +19,55 @@ URL = "https://api.oulunliikenne.fi/proxy/graphql"
 def fetchAllEcoCounterSites(id=ID, domain=LOCATION, step=PRECISION, begin=START_DATE, end=END_DATE):
     start_dt = datetime.strptime(begin, DATE_FORMAT)
     end_dt = datetime.strptime(end, DATE_FORMAT)
-    
     all_counts = []
     current_start = start_dt
 
     print(f"Starting chunked fetch from {begin} to {end}...")
-
     while current_start < end_dt:
-        # Move forward by 1 year
         try:
             current_end = min(current_start.replace(year=current_start.year + 1), end_dt)
-        except ValueError: # Handle Feb 29 leap year issues
+        except ValueError:
             current_end = min(current_start.replace(year=current_start.year + 1, day=28), end_dt)
         
-        start_str = current_start.strftime(DATE_FORMAT)
-        end_str = current_end.strftime(DATE_FORMAT)
+        payload = {
+            "query": """query GetEcoCounterSiteData {{
+                ecoCounterSiteData(id: "{id}", domain: {domain}, step: {step}, begin: "{begin}", end: "{end}") 
+                {{ date counts }}
+            }}""".format(id=id, domain=domain, step=step, begin=current_start.strftime(DATE_FORMAT), end=current_end.strftime(DATE_FORMAT))
+        }
         
-        constructedQuery = """query GetEcoCounterSiteData {{
-          ecoCounterSiteData(
-            id: "{id}",
-            domain: {domain},
-            step: {step},
-            begin: "{begin}",
-            end: "{end}"
-          ) {{
-            date
-            counts
-          }}
-        }}"""
-        
-        payload = {"query": constructedQuery.format(id=id, domain=domain, step=step, begin=start_str, end=end_str)}
-        headers = {"Content-Type": "application/json"}
-
-        print(f"  -> Fetching chunk: {start_str} to {end_str}")
-        
-        r = requests.post(URL, json=payload, headers=headers, timeout=60)
+        r = requests.post(URL, json=payload, headers={"Content-Type": "application/json"}, timeout=60)
         r.raise_for_status()
-        
         data = r.json()
-        if "errors" in data:
-            raise RuntimeError(f"GraphQL errors: {data['errors']}")
+        if "errors" in data: raise RuntimeError(f"GraphQL errors: {data['errors']}")
             
-        chunk_data = data["data"]["ecoCounterSiteData"]
-        all_counts.extend(chunk_data)
-        
+        all_counts.extend(data["data"]["ecoCounterSiteData"])
         current_start = current_end
         time.sleep(0.5)
 
-    print(f"Total rows retrieved: {len(all_counts)}")
-    return {"ecoCounterSiteData": all_counts}
-
-from datetime import timedelta
-
-from datetime import timedelta
-
-def storeJson(data):
-    """
-    Converts timestamps to Helsinki Time, adds the 'Z' suffix to match 
-    weather data, and splits data into subfolders.
-    """
-    base_dir = Path(__file__).parent / "data"
-    rows = data["ecoCounterSiteData"]
-    
-    for row in rows:
+    # Convert all retrieved timestamps to Finnish Local Time (+2h)
+    # This makes the first entry 2015-01-01T00:00:00Z
+    for row in all_counts:
         clean_date = row["date"].split('.')[0].replace('Z', '')
         utc_dt = datetime.strptime(clean_date, "%Y-%m-%dT%H:%M:%S")
         local_dt = (utc_dt + timedelta(hours=2)).replace(microsecond=0)
-        row["date"] = f"{local_dt.isoformat()}Z" 
+        row["date"] = local_dt.strftime(DATE_FORMAT)
 
+    print(f"Total rows retrieved: {len(all_counts)}")
+    return all_counts
+
+def storeSplitJson(rows):
+    """
+    Splits the fetched data into 60/20/20 datasets.
+    """
+    base_dir = Path(__file__).parent / "data"
+    
     total_rows = len(rows)
     if total_rows == 0:
         print("No data found to save.")
         return
 
-    # 60/20/20 split
+    # Calculate split indices
     train_end = int(total_rows * 0.6)
     val_end = int(total_rows * 0.8)
 
@@ -112,11 +87,26 @@ def storeJson(data):
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(payload, f, indent=2, ensure_ascii=False)
         
-        print(f"Saved {len(subset)} rows to {target_dir.name}/{filename}")
+        print(f"Saved {len(subset)} rows to {folder}/{filename} (First: {subset[0]['date']})")
+
+def check_files_exist():
+    base_dir = Path(__file__).parent / "data"
+    files = [
+        base_dir / "training" / "pedestrians_train.json",
+        base_dir / "validation" / "pedestrians_val.json",
+        base_dir / "testing" / "pedestrians_test.json"
+    ]
+    return all(f.exists() for f in files)
 
 if __name__ == "__main__":
     try:
-        eco_counter_sites = fetchAllEcoCounterSites()
-        storeJson(eco_counter_sites)
+        if check_files_exist():
+            choice = input("Pedestrian files already exist. Do you want to refetch? (y/[N]): ").strip().lower()
+            if choice != 'y':
+                print("Using existing files. Execution complete!")
+                sys.exit(0)
+
+        all_data = fetchAllEcoCounterSites()
+        storeSplitJson(all_data)
     except Exception as e:
         print(f"An error occurred: {e}")
