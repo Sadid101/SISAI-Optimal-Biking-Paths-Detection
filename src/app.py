@@ -8,15 +8,32 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
 
+# SET THIS TO THE TIME YOU WANT TO PREDICT FOR
+# ENSURE THE FORMAT IS "YYYY-MM-DD HH:MM:SS" AND THE TIMEZONE IS LOCAL (Europe/Helsinki)
+TEST_DATE = "2026-02-21 15:00:00"
+
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent
 
-#MODIFY THESE TWO TO POINT TO YOUR TRAINING DATA JSON FILES
+# MODIFY THESE PATHS BELOW TWO TO POINT TO YOUR DATA JSON FILES
+
 # ENSURE THE FILENAME ACTUALLY EXISTS
-PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "training" / "2020-02-20_to_2020-02-22_hour_Oulu_kaupunki_100000647.json"
+TRAINING_PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "training" / "pedestrians_train.json"
 
 # This is the historical data for TRAINING
-HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "training" / "historical_weather_data" / "train_final.json"
+TRAINING_HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "training" / "weather_train.json"
+
+# ENSURE THE FILENAME ACTUALLY EXISTS
+TESTING_PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "testing" / "pedestrians_test.json"
+
+# This is the historical data for TESTING
+TESTING_HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "testing" / "weather_test.json"
+
+# ENSURE THE FILENAME ACTUALLY EXISTS
+VALIDATION_PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "validation" / "pedestrians_val.json"
+
+# This is the historical data for VALIDATION
+VALIDATION_HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "validation" / "weather_val.json"
 
 # ENSURE THE FILENAME ACTUALLY EXISTS
 WEATHER_JSON_PATH = SCRIPT_DIR / "data" / "weather_forecast.json"
@@ -73,7 +90,7 @@ def load_weather(weather_path: Path) -> pd.DataFrame:
     df_w["ts"] = df_w["ts"].dt.tz_convert(LOCAL_TZ)
 
     # Align to hour (important for joining)
-    df_w["ts_hour"] = df_w["ts"].dt.floor("h")
+    df_w["ts_hour"] = df_w["ts"].dt.floor("h", ambiguous="infer")
 
     # Keep what we need (rough model uses only temperature)
     df_w = df_w[["ts_hour", "temp_c"]].dropna()
@@ -93,7 +110,7 @@ def load_pedestrians(ped_path: Path) -> pd.DataFrame:
 
     # Parse UTC Z timestamps and convert to LOCAL_TZ
     df_p["date"] = pd.to_datetime(df_p["date"], utc=True)
-    df_p["ts_hour"] = df_p["date"].dt.tz_convert(LOCAL_TZ).dt.floor("h")
+    df_p["ts_hour"] = df_p["date"].dt.tz_convert(LOCAL_TZ).dt.floor("h", ambiguous="infer")
 
     # Rename target to something clearer
     df_p = df_p.rename(columns={"counts": "pedestrians"})
@@ -132,36 +149,39 @@ def time_based_split(df: pd.DataFrame, ts_col: str = "ts_hour", train_ratio: flo
 
 
 # Baseline model: linear regression on temperature + time features
-def processData():
+def processData(requestedTime=TEST_DATE):
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
-    df_w = load_weather(HISTORICAL_WEATHER_PATH)
-    df_p = load_pedestrians(PEDESTRIAN_JSON_PATH)
+    train_df = load_pedestrians(TRAINING_PEDESTRIAN_JSON_PATH)
+    train_weather_df = load_weather(TRAINING_HISTORICAL_WEATHER_PATH)
+ 
 
-    # Join on hourly timestamp
-    df = df_p.merge(df_w, on="ts_hour", how="inner")
+    test_df = load_pedestrians(TESTING_PEDESTRIAN_JSON_PATH)
+    test_weather_df = load_weather(TESTING_HISTORICAL_WEATHER_PATH)
+
+       # Join on hourly timestamp
+    train_merged = train_df.merge(train_weather_df, on="ts_hour", how="inner")
+    test_merged = test_df.merge(test_weather_df, on="ts_hour", how="inner")
 
     # Add features
-    df = add_time_features(df, "ts_hour")
+    train_merged = add_time_features(train_merged, "ts_hour")
+    test_merged = add_time_features(test_merged, "ts_hour")
 
     # --- Baseline features: temperature + time/date features ---
     feature_cols = ["temp_c", "month", "weekday", "is_weekend", "hour_sin", "hour_cos"]
     target_col = "pedestrians"
 
-    # Train/test split (time-based)
-    train_df, test_df = time_based_split(df, "ts_hour", train_ratio=0.8)
+    X_train = train_merged[feature_cols]
+    y_train = train_merged[target_col]
 
-    X_train = train_df[feature_cols]
-    y_train = train_df[target_col]
-
-    X_test = test_df[feature_cols]
-    y_test = test_df[target_col]
+    X_test = test_merged[feature_cols]
+    y_test = test_merged[target_col]
 
     model = LinearRegression()
     model.fit(X_train, y_train)
 
     # Evaluate
     y_pred = model.predict(X_test)
-    print("Rows used (after merge):", len(df))
+    print("Rows used (after merge):", len(train_merged) + len(test_merged))
     print("MAE:", mean_absolute_error(y_test, y_pred))
     print("MSE:", mean_squared_error(y_test, y_pred))
 
@@ -173,7 +193,7 @@ def processData():
 
     # --- Example: predict for a chosen time + temperature ---
     # Suppose user asks: "At 2026-02-21 15:00 local time and temp is -7.0, how many pedestrians?"
-    query_ts = pd.Timestamp("2026-02-21 15:00:00", tz=LOCAL_TZ).floor("h")
+    query_ts = pd.Timestamp(requestedTime, tz=LOCAL_TZ).floor("h")
     query_temp = -7.0
 
     query_df = pd.DataFrame([{"ts_hour": query_ts, "temp_c": query_temp}])
@@ -182,7 +202,6 @@ def processData():
 
     print(f"\nPrediction for {query_ts} at temp {query_temp}°C: {y_hat:.2f} pedestrians")
 def main():
-    ensure_forecast_data()
     processData()
 
 if __name__ == "__main__":
