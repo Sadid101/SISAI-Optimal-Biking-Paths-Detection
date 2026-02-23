@@ -6,6 +6,8 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
+from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
+
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent
 
@@ -19,6 +21,30 @@ PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "training" / "2020-02-20_to_2020-02
 # DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
 
 LOCAL_TZ = "Europe/Helsinki"
+
+def ensure_forecast_data():
+    """
+    Triggers the forecast fetcher to update the weather_forecast.json file 
+    before the model runs.
+    """
+    print("Updating Weather Forecast...")
+    try:
+        fmi = FMIWeatherFetcher()
+        loc = FMIQueryLocation(place="Oulu")
+        
+        # Fetch data
+        df_forecast = fmi.fetch_24h_forecast(loc)
+        payload = fmi.to_json_payload(df_forecast, loc)
+        
+        # Ensure directory exists and save
+        WEATHER_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(WEATHER_JSON_PATH, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
+            
+        print(f"[+] Forecast updated successfully: {WEATHER_JSON_PATH.name}")
+    except Exception as e:
+        print(f"[!] Could not update forecast: {e}")
+        print("Attempting to proceed with existing file if available...")
 
 # Example of fetching bike rental stations, not used in baseline but can be useful for future work
 def load_weather(weather_path: Path) -> pd.DataFrame:
@@ -153,6 +179,7 @@ def processData():
 
     print(f"\nPrediction for {query_ts} at temp {query_temp}°C: {y_hat:.2f} pedestrians")
 def main():
+    ensure_forecast_data()
     processData()
 
 if __name__ == "__main__":
