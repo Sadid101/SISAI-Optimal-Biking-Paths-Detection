@@ -13,10 +13,13 @@ SCRIPT_DIR = Path(__file__).parent
 
 #MODIFY THESE TWO TO POINT TO YOUR TRAINING DATA JSON FILES
 # ENSURE THE FILENAME ACTUALLY EXISTS
-WEATHER_JSON_PATH = SCRIPT_DIR / "data" / "training" / "weather_forecast.json"
+PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "training" / "2020-02-20_to_2020-02-22_hour_Oulu_kaupunki_100000647.json"
+
+# This is the historical data for TRAINING
+HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "training" / "historical_weather_data" / "train_final.json"
 
 # ENSURE THE FILENAME ACTUALLY EXISTS
-PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "training" / "2020-02-20_to_2020-02-22_hour_Oulu_kaupunki_100000647.json"
+WEATHER_JSON_PATH = SCRIPT_DIR / "data" / "weather_forecast.json"
 
 # DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
 
@@ -131,7 +134,7 @@ def time_based_split(df: pd.DataFrame, ts_col: str = "ts_hour", train_ratio: flo
 # Baseline model: linear regression on temperature + time features
 def processData():
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
-    df_w = load_weather(WEATHER_JSON_PATH)
+    df_w = load_weather(HISTORICAL_WEATHER_PATH)
     df_p = load_pedestrians(PEDESTRIAN_JSON_PATH)
 
     # Join on hourly timestamp
