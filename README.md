@@ -20,12 +20,12 @@ git clone https://github.com/Sadid101/SISAI-Optimal-Biking-Paths-Detection.git
 cd SISAI-Optimal-Biking-Paths-Detection
 ```
 2. **Create and Activate Virtual Environment:**
-#### Windows
+- **Windows**
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
-#### macOS/Linux
+- **macOS/Linux**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
