@@ -67,7 +67,6 @@ class FMIWeatherFetcher:
                     v = p.find(".//wml2:value", ns)
                     if t is not None and v is not None:
                         try:
-                            # Rounding to 1 decimal place as requested
                             val = round(float(v.text), 1) if v.text not in ("NaN", "") else None
                             points.append((t.text, val))
                         except ValueError:
