@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
@@ -17,6 +18,8 @@ TEST_END_DATE = "2026-02-21 23:59:00"
 
 # SET THIS TO THE TEMPERATURE YOU WANT TO PREDICT FOR (in Celsius)
 TEST_TEMPERATURE = -20
+
+TEST_SITE_NAME = "Ouluhalli"  # site id 100000647 at "Oulu_kaupunki" Domain
 
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent
@@ -255,6 +258,13 @@ def visualize_predictions(query_df: pd.DataFrame, title: str = "Pedestrian Count
     plt.title(title, fontsize=14, fontweight='bold')
     fig.tight_layout()
     
+    # Show an hourly grid/tick so each hour is distinguishable
+    ax1.xaxis.set_major_locator(mdates.HourLocator(interval=1))
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+
+    # Clamp x-axis to actual data range to avoid empty hours at the ends
+    ax1.set_xlim(query_df['ts_hour'].min(), query_df['ts_hour'].max())
+
     # Rotate x-axis labels for readability
     fig.autofmt_xdate(rotation=45, ha='right')
     
@@ -276,14 +286,8 @@ def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE, endDateTi
     # First train the model on the historical data 
     model, featureColumns, coef, intercept = processData()
 
-    # Then map the date range to hourly timestamps so we can predict for each hour in that range
+    # Then create a DataFrame for the requested date range and temperature, and predict pedestrian counts for each hour in that range
     date_range = pd.date_range(start=startDateTime, end=endDateTime, freq="H", tz=LOCAL_TZ)
-    #  This essentially repeats the predit
-    # "At 2026-02-21 00:00 local time and temp is -7.0, how many pedestrians?"
-    # "At 2026-02-21 01:00 local time and temp is -7.0, how many pedestrians?"
-    # "At 2026-02-21 01:00 local time and temp is -7.0, how many pedestrians?"
-    # "At 2026-02-21 01:00 local time and temp is -7.0, how many pedestrians?"
-    # etc.. until the endDateTime.
     query_df = pd.DataFrame({"ts_hour": date_range, "temp_c": requestedTemperature})
     query_df = add_time_features(query_df, "ts_hour")
     query_df["predicted_pedestrians"] = model.predict(query_df[featureColumns])
@@ -292,7 +296,7 @@ def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE, endDateTi
     
     # Visualize the predictions
     visualize_predictions(query_df, 
-                         title=f"Pedestrian Predictions ({startDateTime} to {endDateTime})")
+                         title=f"Pedestrian ({startDateTime} to {endDateTime}) at {TEST_SITE_NAME}")
 
 
 def main():
