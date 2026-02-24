@@ -10,7 +10,12 @@ from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
 
 # SET THIS TO THE TIME YOU WANT TO PREDICT FOR
 # ENSURE THE FORMAT IS "YYYY-MM-DD HH:MM:SS" AND THE TIMEZONE IS LOCAL (Europe/Helsinki)
-TEST_DATE = "2026-02-21 15:00:00"
+TEST_DATE = "2026-02-21 00:00:00"
+
+TEST_END_DATE = "2026-02-21 23:59:00"
+
+# SET THIS TO THE TEMPERATURE YOU WANT TO PREDICT FOR (in Celsius)
+TEST_TEMPERATURE = -25
 
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent
@@ -149,7 +154,7 @@ def time_based_split(df: pd.DataFrame, ts_col: str = "ts_hour", train_ratio: flo
 
 
 # Baseline model: linear regression on temperature + time features
-def processData(requestedTime=TEST_DATE):
+def processData():
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
     train_df = load_pedestrians(TRAINING_PEDESTRIAN_JSON_PATH)
     train_weather_df = load_weather(TRAINING_HISTORICAL_WEATHER_PATH)
@@ -167,13 +172,13 @@ def processData(requestedTime=TEST_DATE):
     test_merged = add_time_features(test_merged, "ts_hour")
 
     # --- Baseline features: temperature + time/date features ---
-    feature_cols = ["temp_c", "month", "weekday", "is_weekend", "hour_sin", "hour_cos"]
+    featureColumns = ["temp_c", "month", "weekday", "is_weekend", "hour_sin", "hour_cos"]
     target_col = "pedestrians"
 
-    X_train = train_merged[feature_cols]
+    X_train = train_merged[featureColumns]
     y_train = train_merged[target_col]
 
-    X_test = test_merged[feature_cols]
+    X_test = test_merged[featureColumns]
     y_test = test_merged[target_col]
 
     model = LinearRegression()
@@ -186,23 +191,64 @@ def processData(requestedTime=TEST_DATE):
     print("MSE:", mean_squared_error(y_test, y_pred))
 
     # Show learned coefficients (interpretation)
-    coef = pd.Series(model.coef_, index=feature_cols).sort_values(key=np.abs, ascending=False)
+    coef = pd.Series(model.coef_, index=featureColumns).sort_values(key=np.abs, ascending=False)
     print("\nCoefficients:")
     print(coef)
     print("\nIntercept:", model.intercept_)
 
-    # --- Example: predict for a chosen time + temperature ---
+   
+    return model, featureColumns, coef, model.intercept_
+# Baseline model: linear regression on temperature + time features
+def predictPedestrianCountAtHourWithTemp(requestedTime=TEST_DATE, requestedTemperature=TEST_TEMPERATURE):
+    """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
+    model, featureColumns, coef, intercept = processData(requestedTime, requestedTemperature)
+
+     # --- Example: predict for a chosen time + temperature ---
     # Suppose user asks: "At 2026-02-21 15:00 local time and temp is -7.0, how many pedestrians?"
     query_ts = pd.Timestamp(requestedTime, tz=LOCAL_TZ).floor("h")
-    query_temp = -7.0
+    query_temp = requestedTemperature
 
     query_df = pd.DataFrame([{"ts_hour": query_ts, "temp_c": query_temp}])
     query_df = add_time_features(query_df, "ts_hour")
-    y_hat = model.predict(query_df[feature_cols])[0]
+    y_hat = model.predict(query_df[featureColumns])[0]
 
-    print(f"\nPrediction for {query_ts} at temp {query_temp}°C: {y_hat:.2f} pedestrians")
+    timestamp = query_ts
+    temperature = query_temp
+    pedestrianPrediction = y_hat
+
+    print(f"\nPrediction for {timestamp} at temp {temperature}°C: {pedestrianPrediction:.2f} pedestrians")
+
+
+
+    return pedestrianPrediction, timestamp, temperature
+
+def printVisualGraph():
+    """Placeholder for future visualization code."""
+    pass
+
+def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE, endDateTime=TEST_END_DATE, requestedTemperature=TEST_TEMPERATURE):
+    """Placeholder for future prediction code over a date range."""
+   
+
+    # First train the model on the historical data 
+    model, featureColumns, coef, intercept = processData()
+
+    # Then map the date range to hourly timestamps so we can predict for each hour in that range
+    date_range = pd.date_range(start=startDateTime, end=endDateTime, freq="H", tz=LOCAL_TZ)
+    #  This essentially repeats the predit
+    # "At 2026-02-21 00:00 local time and temp is -7.0, how many pedestrians?"
+    # "At 2026-02-21 01:00 local time and temp is -7.0, how many pedestrians?"
+    # "At 2026-02-21 01:00 local time and temp is -7.0, how many pedestrians?"
+    # "At 2026-02-21 01:00 local time and temp is -7.0, how many pedestrians?"
+    # etc.. until the endDateTime.
+    query_df = pd.DataFrame({"ts_hour": date_range, "temp_c": requestedTemperature})
+    query_df = add_time_features(query_df, "ts_hour")
+    query_df["predicted_pedestrians"] = model.predict(query_df[featureColumns])
+    print(f"\nPredictions for {startDateTime} to {endDateTime} at temp {requestedTemperature}°C:")
+    print(query_df[["ts_hour", "temp_c", "predicted_pedestrians"]])
+
+
 def main():
-    processData()
-
+    predictPedestrianCountAtTimeRangeWithTemp()
 if __name__ == "__main__":
     main()
