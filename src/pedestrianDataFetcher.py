@@ -11,13 +11,89 @@ END_DATE = "2020-12-31T22:00:00Z" # LATEST DATE TO CONTAIN SENSIBLE DATA = 2021-
 # The format for parsing and saving timestamps (ISO 8601 UTC)
 DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-PRECISION = "hour"
-LOCATION = "Oulu_kaupunki" 
+#PRECISION
+STEP = "hour"
+
+#LOCATION
+DOMAIN = "Oulu_kaupunki" 
+
+# SITE ID
 ID = "100000647" 
 
 URL = "https://api.oulunliikenne.fi/proxy/graphql"
 
-def fetchAllEcoCounterSites(id=ID, domain=LOCATION, step=PRECISION, begin=START_DATE, end=END_DATE):
+def fetchAllEcoCounterSites():
+    """Fetches metadata for all eco counter sites from the API."""
+    # Query to fetch all eco counter sites (no filtering - API returns all sites)
+    constructedQuery = """query GetAllEcoCounterSites {
+  ecoCounterSites {
+    id
+    siteId
+    name
+    domain
+    userType
+    timezone
+    interval
+    sens
+    channels {
+      id
+      siteId
+      name
+      domain
+      userType
+      timezone
+      interval
+      sens
+      lat
+      lon
+    }
+  }
+}"""
+
+    payload = {"query": constructedQuery}
+    headers = {
+        "Content-Type": "application/json",
+        # Add auth headers here if the API needs them, e.g.:
+        # "Authorization": "Bearer YOUR_TOKEN"
+    }
+
+    print("Fetching eco counter sites...")
+    r = requests.post(URL, json=payload, headers=headers, timeout=10)
+    
+    if not r.ok:
+        print("\n" + "="*80)
+        print("ERROR: Non-2xx response received")
+        print("="*80)
+        print(f"Status Code: {r.status_code}")
+        print(f"Reason: {r.reason}")
+        print(f"\nRequest URL: {r.url}")
+        print(f"\nRequest Payload:\n{json.dumps(payload, indent=2)}")
+        print(f"\nResponse Headers:\n{dict(r.headers)}")
+        print(f"\nResponse Body:\n{r.text}")
+        print("="*80 + "\n")
+        r.raise_for_status()
+    
+    data = r.json()
+
+    # GraphQL returns {"data": {...}, "errors": [...]}
+    if "errors" in data:
+        print("\n" + "="*80)
+        print("GraphQL ERRORS DETECTED")
+        print("="*80)
+        print(f"Number of errors: {len(data['errors'])}\n")
+        print("Full Response Data:")
+        print(json.dumps(data, indent=2, default=str))
+        print("\n" + "-"*80)
+        for i, error in enumerate(data['errors'], 1):
+            print(f"\nError {i}:")
+            print(json.dumps(error, indent=2, default=str))
+        print("\n" + "="*80 + "\n")
+        raise RuntimeError(f"GraphQL errors: {data['errors']}")
+
+    return data["data"]
+
+def fetchEcoCounterSiteData(id=ID, domain=DOMAIN, step=STEP, begin=START_DATE, end=END_DATE):
+    """Fetches eco counter site data for given site in chunks to avoid timeouts and memory issues."""
     start_dt = datetime.strptime(begin, DATE_FORMAT)
     end_dt = datetime.strptime(end, DATE_FORMAT)
     all_counts = []
@@ -39,8 +115,39 @@ def fetchAllEcoCounterSites(id=ID, domain=LOCATION, step=PRECISION, begin=START_
         
         r = requests.post(URL, json=payload, headers={"Content-Type": "application/json"}, timeout=60)
         r.raise_for_status()
+
+        if not r.ok:
+            print("\n" + "="*80)
+            print("ERROR: Non-2xx response received")
+            print("="*80)
+            print(f"Status Code: {r.status_code}")
+            print(f"Reason: {r.reason}")
+            print(f"\nRequest URL: {r.url}")
+            print(f"\nRequest Payload:\n{json.dumps(payload, indent=2)}")
+            print(f"\nResponse Headers:\n{dict(r.headers)}")
+            print(f"\nResponse Body:\n{r.text}")
+            print("="*80 + "\n")
+            r.raise_for_status()
+    
         data = r.json()
-        if "errors" in data: raise RuntimeError(f"GraphQL errors: {data['errors']}")
+
+        # GraphQL returns {"data": {...}, "errors": [...]}
+        if "errors" in data:
+            print("\n" + "="*80)
+            print("GraphQL ERRORS DETECTED")
+            print("="*80)
+            print(f"Number of errors: {len(data['errors'])}\n")
+            print("Full Response Data:")
+            print(json.dumps(data, indent=2, default=str))
+            print("\n" + "-"*80)
+            for i, error in enumerate(data['errors'], 1):
+                print(f"\nError {i}:")
+                print(json.dumps(error, indent=2, default=str))
+            print("\n" + "="*80 + "\n")
+            raise RuntimeError(f"GraphQL errors: {data['errors']}")
+    
+       
+       
             
         all_counts.extend(data["data"]["ecoCounterSiteData"])
         current_start = current_end
@@ -107,7 +214,7 @@ if __name__ == "__main__":
                 print("Using existing files. Execution complete!")
                 sys.exit(0)
 
-        all_data = fetchAllEcoCounterSites()
-        storeSplitJson(all_data)
+        data = fetchEcoCounterSiteData()
+        storeSplitJson(data)
     except Exception as e:
         print(f"An error occurred: {e}")
