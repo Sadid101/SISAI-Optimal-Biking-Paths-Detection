@@ -3,6 +3,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
@@ -10,7 +12,14 @@ from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
 
 # SET THIS TO THE TIME YOU WANT TO PREDICT FOR
 # ENSURE THE FORMAT IS "YYYY-MM-DD HH:MM:SS" AND THE TIMEZONE IS LOCAL (Europe/Helsinki)
-TEST_DATE = "2026-02-21 15:00:00"
+TEST_DATE = "2026-02-21 00:00:00"
+
+TEST_END_DATE = "2026-02-21 23:59:00"
+
+# SET THIS TO THE TEMPERATURE YOU WANT TO PREDICT FOR (in Celsius)
+TEST_TEMPERATURE = -20
+
+TEST_SITE_NAME = "Ouluhalli"  # site id 100000647 at "Oulu_kaupunki" Domain
 
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent
@@ -149,7 +158,7 @@ def time_based_split(df: pd.DataFrame, ts_col: str = "ts_hour", train_ratio: flo
 
 
 # Baseline model: linear regression on temperature + time features
-def processData(requestedTime=TEST_DATE):
+def processData():
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
     train_df = load_pedestrians(TRAINING_PEDESTRIAN_JSON_PATH)
     train_weather_df = load_weather(TRAINING_HISTORICAL_WEATHER_PATH)
@@ -167,13 +176,13 @@ def processData(requestedTime=TEST_DATE):
     test_merged = add_time_features(test_merged, "ts_hour")
 
     # --- Baseline features: temperature + time/date features ---
-    feature_cols = ["temp_c", "month", "weekday", "is_weekend", "hour_sin", "hour_cos"]
+    featureColumns = ["temp_c", "month", "weekday", "is_weekend", "hour_sin", "hour_cos"]
     target_col = "pedestrians"
 
-    X_train = train_merged[feature_cols]
+    X_train = train_merged[featureColumns]
     y_train = train_merged[target_col]
 
-    X_test = test_merged[feature_cols]
+    X_test = test_merged[featureColumns]
     y_test = test_merged[target_col]
 
     model = LinearRegression()
@@ -186,23 +195,111 @@ def processData(requestedTime=TEST_DATE):
     print("MSE:", mean_squared_error(y_test, y_pred))
 
     # Show learned coefficients (interpretation)
-    coef = pd.Series(model.coef_, index=feature_cols).sort_values(key=np.abs, ascending=False)
+    coef = pd.Series(model.coef_, index=featureColumns).sort_values(key=np.abs, ascending=False)
     print("\nCoefficients:")
     print(coef)
     print("\nIntercept:", model.intercept_)
 
-    # --- Example: predict for a chosen time + temperature ---
+   
+    return model, featureColumns, coef, model.intercept_
+# Baseline model: linear regression on temperature + time features
+def predictPedestrianCountAtHourWithTemp(requestedTime=TEST_DATE, requestedTemperature=TEST_TEMPERATURE):
+    """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
+    model, featureColumns, coef, intercept = processData(requestedTime, requestedTemperature)
+
+     # --- Example: predict for a chosen time + temperature ---
     # Suppose user asks: "At 2026-02-21 15:00 local time and temp is -7.0, how many pedestrians?"
     query_ts = pd.Timestamp(requestedTime, tz=LOCAL_TZ).floor("h")
-    query_temp = -7.0
+    query_temp = requestedTemperature
 
     query_df = pd.DataFrame([{"ts_hour": query_ts, "temp_c": query_temp}])
     query_df = add_time_features(query_df, "ts_hour")
-    y_hat = model.predict(query_df[feature_cols])[0]
+    y_hat = model.predict(query_df[featureColumns])[0]
 
-    print(f"\nPrediction for {query_ts} at temp {query_temp}°C: {y_hat:.2f} pedestrians")
+    timestamp = query_ts
+    temperature = query_temp
+    pedestrianPrediction = y_hat
+
+    print(f"\nPrediction for {timestamp} at temp {temperature}°C: {pedestrianPrediction:.2f} pedestrians")
+
+
+
+    return pedestrianPrediction, timestamp, temperature
+
+def visualize_predictions(query_df: pd.DataFrame, title: str = "Pedestrian Count Predictions", save_path: str = None):
+    """
+    Visualizes prediction results with a line plot.
+    
+    Args:
+        query_df: DataFrame with columns ['ts_hour', 'predicted_pedestrians', 'temp_c']
+        title: Title for the graph
+        save_path: Optional path to save the figure (e.g., 'predictions.png')
+    """
+    fig, ax1 = plt.subplots(figsize=(12, 6))
+    
+    # Plot pedestrian predictions on primary y-axis
+    color = 'tab:blue'
+    ax1.set_xlabel('Time', fontsize=12)
+    ax1.set_ylabel('Predicted Pedestrians', color=color, fontsize=12)
+    ax1.plot(query_df['ts_hour'], query_df['predicted_pedestrians'], 
+             color=color, marker='o', linewidth=2, markersize=4, label='Pedestrian Count')
+    ax1.tick_params(axis='y', labelcolor=color)
+    ax1.grid(True, alpha=0.3)
+    
+    # Plot temperature on secondary y-axis
+    ax2 = ax1.twinx()
+    color = 'tab:red'
+    ax2.set_ylabel('Temperature (°C)', color=color, fontsize=12)
+    ax2.plot(query_df['ts_hour'], query_df['temp_c'], 
+             color=color, marker='s', linewidth=2, markersize=4, linestyle='--', label='Temperature')
+    ax2.tick_params(axis='y', labelcolor=color)
+    
+    # Formatting
+    plt.title(title, fontsize=14, fontweight='bold')
+    fig.tight_layout()
+    
+    # Show an hourly grid/tick so each hour is distinguishable
+    ax1.xaxis.set_major_locator(mdates.HourLocator(interval=1))
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+
+    # Clamp x-axis to actual data range to avoid empty hours at the ends
+    ax1.set_xlim(query_df['ts_hour'].min(), query_df['ts_hour'].max())
+
+    # Rotate x-axis labels for readability
+    fig.autofmt_xdate(rotation=45, ha='right')
+    
+    # Add legends from both axes
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+    
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Graph saved to: {save_path}")
+    
+    plt.show()
+
+def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE, endDateTime=TEST_END_DATE, requestedTemperature=TEST_TEMPERATURE):
+    """Placeholder for future prediction code over a date range."""
+   
+
+    # First train the model on the historical data 
+    model, featureColumns, coef, intercept = processData()
+
+    # Then create a DataFrame for the requested date range and temperature, and predict pedestrian counts for each hour in that range
+    date_range = pd.date_range(start=startDateTime, end=endDateTime, freq="H", tz=LOCAL_TZ)
+    query_df = pd.DataFrame({"ts_hour": date_range, "temp_c": requestedTemperature})
+    query_df = add_time_features(query_df, "ts_hour")
+    query_df["predicted_pedestrians"] = model.predict(query_df[featureColumns])
+    print(f"\nPredictions for {startDateTime} to {endDateTime} at temp {requestedTemperature}°C:")
+    print(query_df[["ts_hour", "temp_c", "predicted_pedestrians"]])
+    
+    # Visualize the predictions
+    visualize_predictions(query_df, 
+                         title=f"Pedestrian ({startDateTime} to {endDateTime}) at {TEST_SITE_NAME}")
+
+
 def main():
-    processData()
-
+    predictPedestrianCountAtTimeRangeWithTemp()
 if __name__ == "__main__":
     main()
