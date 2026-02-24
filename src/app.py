@@ -3,6 +3,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
@@ -15,7 +16,7 @@ TEST_DATE = "2026-02-21 00:00:00"
 TEST_END_DATE = "2026-02-21 23:59:00"
 
 # SET THIS TO THE TEMPERATURE YOU WANT TO PREDICT FOR (in Celsius)
-TEST_TEMPERATURE = -25
+TEST_TEMPERATURE = -20
 
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent
@@ -222,9 +223,51 @@ def predictPedestrianCountAtHourWithTemp(requestedTime=TEST_DATE, requestedTempe
 
     return pedestrianPrediction, timestamp, temperature
 
-def printVisualGraph():
-    """Placeholder for future visualization code."""
-    pass
+def visualize_predictions(query_df: pd.DataFrame, title: str = "Pedestrian Count Predictions", save_path: str = None):
+    """
+    Visualizes prediction results with a line plot.
+    
+    Args:
+        query_df: DataFrame with columns ['ts_hour', 'predicted_pedestrians', 'temp_c']
+        title: Title for the graph
+        save_path: Optional path to save the figure (e.g., 'predictions.png')
+    """
+    fig, ax1 = plt.subplots(figsize=(12, 6))
+    
+    # Plot pedestrian predictions on primary y-axis
+    color = 'tab:blue'
+    ax1.set_xlabel('Time', fontsize=12)
+    ax1.set_ylabel('Predicted Pedestrians', color=color, fontsize=12)
+    ax1.plot(query_df['ts_hour'], query_df['predicted_pedestrians'], 
+             color=color, marker='o', linewidth=2, markersize=4, label='Pedestrian Count')
+    ax1.tick_params(axis='y', labelcolor=color)
+    ax1.grid(True, alpha=0.3)
+    
+    # Plot temperature on secondary y-axis
+    ax2 = ax1.twinx()
+    color = 'tab:red'
+    ax2.set_ylabel('Temperature (°C)', color=color, fontsize=12)
+    ax2.plot(query_df['ts_hour'], query_df['temp_c'], 
+             color=color, marker='s', linewidth=2, markersize=4, linestyle='--', label='Temperature')
+    ax2.tick_params(axis='y', labelcolor=color)
+    
+    # Formatting
+    plt.title(title, fontsize=14, fontweight='bold')
+    fig.tight_layout()
+    
+    # Rotate x-axis labels for readability
+    fig.autofmt_xdate(rotation=45, ha='right')
+    
+    # Add legends from both axes
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+    
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Graph saved to: {save_path}")
+    
+    plt.show()
 
 def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE, endDateTime=TEST_END_DATE, requestedTemperature=TEST_TEMPERATURE):
     """Placeholder for future prediction code over a date range."""
@@ -246,6 +289,10 @@ def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE, endDateTi
     query_df["predicted_pedestrians"] = model.predict(query_df[featureColumns])
     print(f"\nPredictions for {startDateTime} to {endDateTime} at temp {requestedTemperature}°C:")
     print(query_df[["ts_hour", "temp_c", "predicted_pedestrians"]])
+    
+    # Visualize the predictions
+    visualize_predictions(query_df, 
+                         title=f"Pedestrian Predictions ({startDateTime} to {endDateTime})")
 
 
 def main():
