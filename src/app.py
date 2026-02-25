@@ -19,9 +19,11 @@ from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
 # TEST RANGE FOR NOW IS 2026-02-25 00:00 to 2026-03-02 23:59 (full days with metrics), weather forecast includes only this date range.
 #
 # ENSURE THE FORMAT IS "YYYY-MM-DD HH:MM:SS" AND THE TIMEZONE IS LOCAL (Europe/Helsinki)
+
+# FOR A FULL DAY START WITH MIDNIGHT AND END WITH MIDNIGHT OF THE NEXT DAY, OTHERWISE THE LAST HOUR MAY BE CUT OFF IN THE GRAPH (BECAUSE OF HOURLY ALIGNMENT)
 TEST_DATE_START = "2026-02-25 00:00:00"
 
-TEST_DATE_END = "2026-02-25 23:59:00"
+TEST_DATE_END = "2026-02-26 00:00:00"
 
 #TEST_DATE_START = "2026-03-02 00:00:00"
 
@@ -272,9 +274,9 @@ def visualize_predictions(query_df: pd.DataFrame, title: str = "Pedestrian Count
     plt.title(title, fontsize=14, fontweight='bold')
     fig.tight_layout()
     
-    # Show an hourly grid/tick so each hour is distinguishable
+    # Show an hourly grid/tick so each hour is distinguishable (force local TZ)
     ax1.xaxis.set_major_locator(mdates.HourLocator(interval=1))
-    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M', tz=LOCAL_TZ))
 
     # Clamp x-axis to actual data range to avoid empty hours at the ends
     ax1.set_xlim(query_df['ts_hour'].min(), query_df['ts_hour'].max())
