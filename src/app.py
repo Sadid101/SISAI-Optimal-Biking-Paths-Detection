@@ -19,9 +19,15 @@ from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
 # TEST RANGE FOR NOW IS 2026-02-25 00:00 to 2026-03-02 23:59 (full days with metrics), weather forecast includes only this date range.
 #
 # ENSURE THE FORMAT IS "YYYY-MM-DD HH:MM:SS" AND THE TIMEZONE IS LOCAL (Europe/Helsinki)
-TEST_DATE_START = "2026-03-02 00:00:00"
 
-TEST_DATE_END = "2026-03-02 23:59:00"
+# FOR A FULL DAY START WITH MIDNIGHT AND END WITH MIDNIGHT OF THE NEXT DAY, OTHERWISE THE LAST HOUR MAY BE CUT OFF IN THE GRAPH (BECAUSE OF HOURLY ALIGNMENT)
+TEST_DATE_START = "2026-02-25 00:00:00"
+
+TEST_DATE_END = "2026-02-26 00:00:00"
+
+#TEST_DATE_START = "2026-03-02 00:00:00"
+
+#TEST_DATE_END = "2026-03-02 23:59:00"
 
 # DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
 #
@@ -268,9 +274,9 @@ def visualize_predictions(query_df: pd.DataFrame, title: str = "Pedestrian Count
     plt.title(title, fontsize=14, fontweight='bold')
     fig.tight_layout()
     
-    # Show an hourly grid/tick so each hour is distinguishable
+    # Show an hourly grid/tick so each hour is distinguishable (force local TZ)
     ax1.xaxis.set_major_locator(mdates.HourLocator(interval=1))
-    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M', tz=LOCAL_TZ))
 
     # Clamp x-axis to actual data range to avoid empty hours at the ends
     ax1.set_xlim(query_df['ts_hour'].min(), query_df['ts_hour'].max())
@@ -307,35 +313,60 @@ def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE_START, end
     # Visualize the predictions
     visualize_predictions(query_df, 
                          title=f"Pedestrian ({startDateTime} to {endDateTime}) at {TEST_SITE_NAME}")
+    
+
+
 def predictPedestrianCountAtTimeRange(startDateTime=TEST_DATE_START, endDateTime=TEST_DATE_END):
     """Predicts pedestrian counts over a date range using weather forecast data."""
-   
-    weather_forecast_data = load_weather(WEATHER_JSON_PATH)
+    
+    # Load the forecast
+    forecast_df = load_weather(WEATHER_JSON_PATH)
 
     # First train the model on the historical data 
     model, featureColumns, coef, intercept = processData()
 
-    # Create a DataFrame for the requested date range and merge with forecast temperatures
+    # Create a DataFrame for the requested date range
     date_range = pd.date_range(start=startDateTime, end=endDateTime, freq="h", tz=LOCAL_TZ)
-    query_df = pd.DataFrame({"ts_hour": date_range})
     
-    # Merge with weather forecast to get hourly temperatures (inner join to only use hours with forecast data)
-    query_df = query_df.merge(weather_forecast_data, on="ts_hour", how="inner")
+    # For each hour in the range, find the matching forecast temperature and predict
+    predictions = []
     
-    if query_df.empty:
+    for query_ts in date_range:
+        query_ts = pd.Timestamp(query_ts).floor("h")
+        
+        # Find the matching temperature in the forecast
+        matching_row = forecast_df[forecast_df['ts_hour'] == query_ts]
+        
+        if not matching_row.empty:
+            query_temp = matching_row.iloc[0]['temp_c']
+        else:
+            print(f"Warning: {query_ts} not in forecast range. Assuming the temperature stays the same...")
+            query_temp = forecast_df['temp_c'].iloc[-1]  # Use last known temp as fallback
+            
+        
+        # Perform prediction using the forecast temperature
+        query_df = pd.DataFrame([{"ts_hour": query_ts, "temp_c": query_temp}])
+        query_df = add_time_features(query_df, "ts_hour")
+        y_hat = model.predict(query_df[featureColumns])[0]
+        
+        predictions.append({
+            "ts_hour": query_ts,
+            "temp_c": query_temp,
+            "predicted_pedestrians": y_hat
+        })
+    
+    if not predictions:
         print(f"Warning: No weather forecast data available for the requested time range.")
-        print(f"Forecast data covers: {weather_forecast_data['ts_hour'].min()} to {weather_forecast_data['ts_hour'].max()}")
+        print(f"Forecast data covers: {forecast_df['ts_hour'].min()} to {forecast_df['ts_hour'].max()}")
         return
     
-    # Add time features and predict
-    query_df = add_time_features(query_df, "ts_hour")
-    query_df["predicted_pedestrians"] = model.predict(query_df[featureColumns])
+    prediction_df = pd.DataFrame(predictions)
     
     print(f"\nPredictions for {startDateTime} to {endDateTime} using weather forecast:")
-    print(query_df[["ts_hour", "temp_c", "predicted_pedestrians"]])
+    print(prediction_df[["ts_hour", "temp_c", "predicted_pedestrians"]])
     
     # Visualize the predictions
-    visualize_predictions(query_df, 
+    visualize_predictions(prediction_df, 
                          title=f"Pedestrian Predictions ({startDateTime} to {endDateTime}) at {TEST_SITE_NAME}")
 
 
