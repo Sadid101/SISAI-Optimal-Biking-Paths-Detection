@@ -26,13 +26,15 @@ class FMIWeatherFetcher:
     def __init__(self, base_url: str = FMI_WFS_BASE):
         self.base_url = base_url
 
-    def fetch_forecast(self, location: FMIQueryLocation) -> pd.DataFrame:
+    def fetch_forecast(self, location: FMIQueryLocation, start_time: Optional[datetime] = None) -> pd.DataFrame:
         """
         Fetches the official 7-day hourly forecast.
         """
-        # Set start to the next full hour for a clean 7-day window
-        now_utc = (datetime.now(timezone.utc) + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
-        end_utc = now_utc + timedelta(days=7)
+        # If no start_time provided, use 'now'
+        if start_time is None:
+            start_time = (datetime.now(timezone.utc) + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
+    
+        end_time = start_time + timedelta(days=7)
 
         params = {
             "service": "WFS",
@@ -40,8 +42,8 @@ class FMIWeatherFetcher:
             "request": "getFeature",
             "storedquery_id": "fmi::forecast::edited::weather::scandinavia::point::timevaluepair",
             "timestep": 60,
-            "starttime": now_utc.strftime(DATE_FORMAT),
-            "endtime": end_utc.strftime(DATE_FORMAT)
+            "starttime": start_time.strftime(DATE_FORMAT),
+            "endtime": end_time.strftime(DATE_FORMAT)
         }
         params.update(location.to_params())
 
