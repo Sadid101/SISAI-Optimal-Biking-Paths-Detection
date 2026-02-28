@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 START_DATE = "2014-12-31T22:00:00Z" # EARLIEST DATE TO CONTAIN SENSIBLE DATA = 2010-12-31T22:00:00.000Z
-END_DATE = "2020-12-31T22:00:00Z" # LATEST DATE TO CONTAIN SENSIBLE DATA = 2021-05-31T23:59:59
+END_DATE = "2026-01-01T00:00:00Z" # LATEST DATE TO CONTAIN SENSIBLE DATA = 2021-05-31T23:59:59
 
 # The format for parsing and saving timestamps (ISO 8601 UTC)
 DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
@@ -15,10 +15,10 @@ DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 STEP = "hour"
 
 #LOCATION
-DOMAIN = "Oulu_kaupunki" 
+DOMAIN = "Oulu_kaupunki"
 
 # SITE ID
-ID = "100000647" 
+ID = "100025213" # Kempele/Asemantie
 
 URL = "https://api.oulunliikenne.fi/proxy/graphql"
 
@@ -99,6 +99,13 @@ def fetchEcoCounterSiteData(id=ID, domain=DOMAIN, step=STEP, begin=START_DATE, e
     all_counts = []
     current_start = start_dt
 
+    print("\n--- API REQUEST DETAILS ---")
+    print(f"URL:    {URL}")
+    print(f"DOMAIN: {domain}")
+    print(f"SITEID: {id}")
+    print(f"RANGE:  {begin} to {end}")
+    print("---------------------------\n")
+
     print(f"Starting chunked fetch from {begin} to {end}...")
     while current_start < end_dt:
         try:
@@ -114,44 +121,19 @@ def fetchEcoCounterSiteData(id=ID, domain=DOMAIN, step=STEP, begin=START_DATE, e
         }
         
         r = requests.post(URL, json=payload, headers={"Content-Type": "application/json"}, timeout=60)
-        r.raise_for_status()
-
-        if not r.ok:
-            print("\n" + "="*80)
-            print("ERROR: Non-2xx response received")
-            print("="*80)
-            print(f"Status Code: {r.status_code}")
-            print(f"Reason: {r.reason}")
-            print(f"\nRequest URL: {r.url}")
-            print(f"\nRequest Payload:\n{json.dumps(payload, indent=2)}")
-            print(f"\nResponse Headers:\n{dict(r.headers)}")
-            print(f"\nResponse Body:\n{r.text}")
-            print("="*80 + "\n")
-            r.raise_for_status()
-    
-        data = r.json()
-
-        # GraphQL returns {"data": {...}, "errors": [...]}
-        if "errors" in data:
-            print("\n" + "="*80)
-            print("GraphQL ERRORS DETECTED")
-            print("="*80)
-            print(f"Number of errors: {len(data['errors'])}\n")
-            print("Full Response Data:")
-            print(json.dumps(data, indent=2, default=str))
-            print("\n" + "-"*80)
-            for i, error in enumerate(data['errors'], 1):
-                print(f"\nError {i}:")
-                print(json.dumps(error, indent=2, default=str))
-            print("\n" + "="*80 + "\n")
-            raise RuntimeError(f"GraphQL errors: {data['errors']}")
-    
-       
-       
-            
-        all_counts.extend(data["data"]["ecoCounterSiteData"])
+        
+        if r.ok:
+            data = r.json()
+            # If the API returns data for this specific year chunk, add it!
+            if "data" in data and data["data"]["ecoCounterSiteData"]:
+                chunk_data = data["data"]["ecoCounterSiteData"]
+                all_counts.extend(chunk_data)
+                print(f"  [+] Found {len(chunk_data)} rows for {current_start.year}")
+            else:
+                print(f"  [-] No data for {current_start.year} (skipping...)")
+        
         current_start = current_end
-        time.sleep(0.5)
+        time.sleep(0.2)
 
     # Convert all retrieved timestamps to Finnish Local Time (+2h)
     # This makes the first entry 2015-01-01T00:00:00Z

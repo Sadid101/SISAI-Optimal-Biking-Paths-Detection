@@ -1,0 +1,1066 @@
+[
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDAwMjUyMTM=",
+    "siteId": "100025213",
+    "name": "Kempele/Asemantie",
+    "domain": "Oulu_kaupunki",
+    "userType": 7,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDEwMjUyMTM=",
+        "name": "JK_Keskustaan",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDIwMjUyMTM=",
+        "name": "JK_Keskustasta",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDMwMjUyMTM=",
+        "name": "PP_Keskustaan",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDQwMjUyMTM=",
+        "name": "PP_Keskustasta",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDAwMjY0Njg=",
+    "siteId": "100026468",
+    "name": "Koiteli",
+    "domain": "Oulu_kaupunki",
+    "userType": 1,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDEwMjY0Njg=",
+        "name": "Channel 1 IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDIwMjY0Njg=",
+        "name": "Channel 2 OUT",
+        "userType": 1
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YQ==",
+    "siteId": "patosilta",
+    "name": "Patosilta",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV8x",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV8y",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV8z",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV80",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGE=",
+    "siteId": "erkkolansilta",
+    "name": "Erkkolan silta",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfMQ==",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfMg==",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfMw==",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfNA==",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aQ==",
+    "siteId": "raatti",
+    "name": "Raatti",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV8x",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV8y",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV8z",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV80",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYQ==",
+    "siteId": "maikkulan-baana",
+    "name": "Maikkulan baana",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV8x",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV8y",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV8z",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV80",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWU=",
+    "siteId": "poikkimaantie",
+    "name": "Poikkimaantie",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfMQ==",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfMg==",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfMw==",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfNA==",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGE=",
+    "siteId": "karjasilta",
+    "name": "Karjasilta",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfMQ==",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfMg==",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfMw==",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfNA==",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYQ==",
+    "siteId": "hollihaka",
+    "name": "Hollihaka",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV8x",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV8y",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV8z",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV80",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YQ==",
+    "siteId": "pikisaarensilta",
+    "name": "Pikisaarensilta",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV8x",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV8y",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV8z",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV80",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdQ==",
+    "siteId": "etelainen-alikulku",
+    "name": "Eteläinen alikulku",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV8x",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV8y",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV8z",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV80",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGll",
+    "siteId": "limingantie",
+    "name": "Limingantie",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzE=",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzI=",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzM=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzQ=",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGE=",
+    "siteId": "rautasilta",
+    "name": "Rautasilta",
+    "domain": "Oulu_Kapy",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfMQ==",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfMg==",
+        "name": "JK_OUT",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfMw==",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfNA==",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06TEkwM0xW",
+    "siteId": "LI03LV",
+    "name": "Liminka/Ouluntie (mt847)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06TEkwM0xWX0cyX0cx",
+        "name": "G2_G1",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06TEkwM0xWX0czMV9HMzA=",
+        "name": "G31_G30",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE4MA==",
+    "siteId": "OULU180",
+    "name": "Äimärautio (Limingantie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE4MF9iMzFfMl9iMzBfMjpjMzFfMl9jMzBfMg==",
+        "name": "b31_2_b30_2:c31_2_c30_2",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE4MF9iMzBfMl9iMzFfMjpjMzBfMl9jMzFfMg==",
+        "name": "b30_2_b31_2:c30_2_c31_2",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA5OQ==",
+    "siteId": "OULU099",
+    "name": "Myllytulli (Tulliväylä)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA5OV9QUDE3XzE4",
+        "name": "PP17_18",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA5OV9QUDE4XzE3",
+        "name": "PP18_17",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Mg==",
+    "siteId": "OULU192",
+    "name": "Kynsilehto (Parkkisenkankaantie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Ml9wcDE4XzE3",
+        "name": "pp18_17",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Ml9wcDIwXzE5",
+        "name": "pp20_19",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTY3",
+    "siteId": "OULU67",
+    "name": "Taka-Lyötty (Leevi Madetojan katu länsipuoli)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTY3X3BwMTNfMTQ=",
+        "name": "pp13_14",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTY3X3BwMTVfMTY=",
+        "name": "pp15_16",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Mw==",
+    "siteId": "OULU193",
+    "name": "Rusko (Raitotie/Konetie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5M19QUEFfMQ==",
+        "name": "PPA_1",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5M19QUEFfMg==",
+        "name": "PPA_2",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Ng==",
+    "siteId": "OULU196",
+    "name": "Rusko (Raitotie/Kiilletie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Nl9jMzBfYzMx",
+        "name": "c30_c31",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Nl9kMzBfZDMx",
+        "name": "d30_d31",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzMw==",
+    "siteId": "OULU133",
+    "name": "Höyhtyä (Lintulammentie/Latokartanontie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzM19wcDEzXzE0",
+        "name": "A31_2_A30_2_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzM19wcDE1XzE2",
+        "name": "A31_1_A30_1_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEwOA==",
+    "siteId": "OULU108",
+    "name": "Välivainio (Sorvarintie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEwOF9QUDQxXzQy",
+        "name": "PP41_42",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEwOF9QUDQyXzQx",
+        "name": "PP42_41",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3Ng==",
+    "siteId": "OULU176",
+    "name": "Kuivasjärvi (Raitotie/Kalikkatie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3Nl9QUF9BMjlfQTMwX19B",
+        "name": "PP_A29_A30__A",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3Nl9QUF9CMjlfQjMwX19C",
+        "name": "PP_B29_B30__B",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNQ==",
+    "siteId": "OULU135",
+    "name": "Höyhtyä (Lintulammentie/Sorsatie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNV9wcDEzXzE0",
+        "name": "B31_2_B30_2_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNV9wcDE1XzE2",
+        "name": "B31_1_B30_1_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5MQ==",
+    "siteId": "OULU191",
+    "name": "Myllyoja (Vaalantie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5MV9QUEFfMg==",
+        "name": "PPA_2",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5MV9QUEFfMQ==",
+        "name": "PPA_1",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NQ==",
+    "siteId": "OULU175",
+    "name": "Kuivasjärvi (Raitotie/Pöllöntie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NV9wcF9hMjlfYTMw",
+        "name": "pp_a29_a30",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NV9wcF9iMjlfYjMw",
+        "name": "pp_b29_b30",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzOQ==",
+    "siteId": "OULU139",
+    "name": "Kaakkuri (Kaakkurinpolku)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzOV9QUF9QMTFfUDEy",
+        "name": "PP_P11_P12",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzOV9QUF9QOV9QMTA=",
+        "name": "PP_P9_P10",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UxM0xW",
+    "siteId": "KE13LV",
+    "name": "Kempele/Zatelliitti (Komeetantie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UxM0xWX1BQM19QUDQ=",
+        "name": "PP3_PP4",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UxM0xWX1BQNF9QUDM=",
+        "name": "PP4_PP3",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDE=",
+    "siteId": "KI001",
+    "name": "Laivakankaantie (vt 20)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDFfRkcyMF8yMQ==",
+        "name": "FG20_21",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDFfRkcyMV8yMA==",
+        "name": "FG21_20",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NA==",
+    "siteId": "OULU174",
+    "name": "Kuivasjärvi (Raitotie/Alakyläntie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDFfUFAy",
+        "name": "PP1_PP2",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDJfUFAx",
+        "name": "PP2_PP1",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDVfUFA2",
+        "name": "PP5_PP6",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDZfUFA1",
+        "name": "PP6_PP5",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE0Mw==",
+    "siteId": "OULU143",
+    "name": "Oulunlahti (Limingantie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE0M19QSUxPVF9OT1JNX0lOOlBQX0RlbWFuZF9IMV9JTg==",
+        "name": "PILOT_NORM_IN:PP_Demand_H1_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE0M19QSUxPVF9OT1JNX09VVDpQUF9EZW1hbmRfSDE=",
+        "name": "PILOT_NORM_OUT:PP_Demand_H1",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UwMDc=",
+    "siteId": "KE007",
+    "name": "Kempele/Paituri (mt847)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UwMDdfUFBfRGVtYW5kX0hB",
+        "name": "PP_Demand_HA",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UwMDdfUFBfRGVtYW5kX0hC",
+        "name": "PP_Demand_HB",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Nw==",
+    "siteId": "OULU197",
+    "name": "Saarela (Vaalantie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5N19BMTRfMV9BMTVfMQ==",
+        "name": "A14_1_A15_1",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5N19BMTRfMl9BMTVfMg==",
+        "name": "A14_2_A15_2",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA1OQ==",
+    "siteId": "OULU059",
+    "name": "Kastelli (Oulunsuuntie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA1OV9CMjlfMV9CMzBfMTpBMjlfMV9BMzBfMQ==",
+        "name": "B29_1_B30_1:A29_1_A30_1",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA1OV9CMzBfMV9CMjlfMTpBMzBfMV9BMjlfMQ==",
+        "name": "B30_1_B29_1:A30_1_A29_1",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTExNQ==",
+    "siteId": "OULU115",
+    "name": "Lipporannantie",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTExNV9BMjlfQTMw",
+        "name": "A29_A30",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTExNV9CMTlfQjIw",
+        "name": "B19_B20",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3MA==",
+    "siteId": "OULU170",
+    "name": "Toppila (Koskelantie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3MF9QUDlfMjlfMzA6UFAxNF8yOV8zMA==",
+        "name": "PP9_29_30:PP14_29_30",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3MF9QUDlfMzBfMjk6UFAxNF8zMF8yOQ==",
+        "name": "PP9_30_29:PP14_30_29",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNA==",
+    "siteId": "OULU134",
+    "name": "Karjasilta (Joutsentie/Paljetie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNF9CMzBfMl9CMjlfMl9JTg==",
+        "name": "B30_2_B29_2_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNF9CMzBfMV9CMjlfMV9PVVQ=",
+        "name": "B30_1_B29_1_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTAzNA==",
+    "siteId": "OULU034",
+    "name": "Limingantulli (Limingantie/Kempeleentie)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTAzNF9BXzMwXzJfQV8zMF8x",
+        "name": "A_30_2_A_30_1",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTAzNF9BXzMwXzFfQV8zMF8y",
+        "name": "A_30_1_A_30_2",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDM=",
+    "siteId": "KI003",
+    "name": "Ylikiimingintie (vt20)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDNfSDI5X0gzMA==",
+        "name": "H29_H30",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDNfRzI5X0czMA==",
+        "name": "G29_G30",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDI=",
+    "siteId": "KI002",
+    "name": "Jäälintie (vt 20)",
+    "domain": "Oulu_TPM",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDJfUFBfRkcxNQ==",
+        "name": "PP_FG15",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDJfUFBfR0YxNQ==",
+        "name": "PP_GF15",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0",
+    "siteId": "300062134",
+    "name": "Herukka (mt 847)",
+    "domain": "Oulu_ELY",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzA=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzE=",
+        "name": "PP_OUT",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzI=",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzM=",
+        "name": "JK_OUT",
+        "userType": 1
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1",
+    "siteId": "300044495",
+    "name": "Kiiminki (vt 20 / mt 848)",
+    "domain": "Oulu_ELY",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzA=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzE=",
+        "name": "PP_OUT",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzI=",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzM=",
+        "name": "JK_OUT",
+        "userType": 1
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2",
+    "siteId": "300044496",
+    "name": "Haukipudas/Kiiminkijoki (mt 847)",
+    "domain": "Oulu_ELY",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzA=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzE=",
+        "name": "PP_OUT",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzI=",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzM=",
+        "name": "JK_OUT",
+        "userType": 1
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3",
+    "siteId": "300044497",
+    "name": "Kuusamontie/Laanila (vt 20)",
+    "domain": "Oulu_ELY",
+    "userType": 12,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzA=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzE=",
+        "name": "PP_OUT",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzI=",
+        "name": "JK_IN",
+        "userType": 1
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzM=",
+        "name": "JK_OUT",
+        "userType": 1
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg0",
+    "siteId": "300044484",
+    "name": "Lentokentäntie (mt 815)",
+    "domain": "Oulu_ELY",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg0XzA=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg0XzE=",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk0",
+    "siteId": "300044494",
+    "name": "Hakamaa (mt 847)",
+    "domain": "Oulu_ELY",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk0XzA=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk0XzE=",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  {
+    "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg4",
+    "siteId": "300044488",
+    "name": "Kuusamontie/Korvenkylä (vt 20)",
+    "domain": "Oulu_ELY",
+    "userType": 2,
+    "channels": [
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg4XzA=",
+        "name": "PP_IN",
+        "userType": 2
+      },
+      {
+        "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg4XzE=",
+        "name": "PP_OUT",
+        "userType": 2
+      }
+    ]
+  },
+  null
+]
