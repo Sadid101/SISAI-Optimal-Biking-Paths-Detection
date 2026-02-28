@@ -1,9 +1,8 @@
-import os
 import requests
 import pandas as pd
 import xml.etree.ElementTree as ET
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import time
 from pathlib import Path
 
