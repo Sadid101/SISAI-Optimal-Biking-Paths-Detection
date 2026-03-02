@@ -1,0 +1,2105 @@
+{
+  "ecoCounterSites": [
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDAwMjUyMTM=",
+      "siteId": "100025213",
+      "name": "Kempele/Asemantie",
+      "domain": "Oulu_kaupunki",
+      "userType": 7,
+      "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+      "interval": 60,
+      "sens": 5,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDEwMjUyMTM=",
+          "siteId": "101025213",
+          "name": "JK_Keskustaan",
+          "domain": "Oulu_kaupunki",
+          "userType": 1,
+          "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+          "interval": 60,
+          "sens": 1,
+          "lat": 64.91062,
+          "lon": 25.514536
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDIwMjUyMTM=",
+          "siteId": "102025213",
+          "name": "JK_Keskustasta",
+          "domain": "Oulu_kaupunki",
+          "userType": 1,
+          "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+          "interval": 60,
+          "sens": 2,
+          "lat": 64.91062,
+          "lon": 25.514536
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDMwMjUyMTM=",
+          "siteId": "103025213",
+          "name": "PP_Keskustaan",
+          "domain": "Oulu_kaupunki",
+          "userType": 2,
+          "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+          "interval": 60,
+          "sens": 1,
+          "lat": 64.91062,
+          "lon": 25.514536
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDQwMjUyMTM=",
+          "siteId": "104025213",
+          "name": "PP_Keskustasta",
+          "domain": "Oulu_kaupunki",
+          "userType": 2,
+          "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+          "interval": 60,
+          "sens": 2,
+          "lat": 64.91062,
+          "lon": 25.514536
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDAwMjY0Njg=",
+      "siteId": "100026468",
+      "name": "Koiteli",
+      "domain": "Oulu_kaupunki",
+      "userType": 1,
+      "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+      "interval": 60,
+      "sens": 5,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDEwMjY0Njg=",
+          "siteId": "101026468",
+          "name": "Channel 1 IN",
+          "domain": "Oulu_kaupunki",
+          "userType": 1,
+          "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+          "interval": 60,
+          "sens": 1,
+          "lat": 65.09729160105616,
+          "lon": 25.81736303323303
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9rYXVwdW5raToxMDIwMjY0Njg=",
+          "siteId": "102026468",
+          "name": "Channel 2 OUT",
+          "domain": "Oulu_kaupunki",
+          "userType": 1,
+          "timezone": "(UTC+02:00) Europe/Helsinki;DST",
+          "interval": 60,
+          "sens": 2,
+          "lat": 65.09729160105616,
+          "lon": 25.81736303323303
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YQ==",
+      "siteId": "patosilta",
+      "name": "Patosilta",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV8x",
+          "siteId": "patosilta_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.02132,
+          "lon": 25.483478
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV8y",
+          "siteId": "patosilta_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.02132,
+          "lon": 25.483478
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV8z",
+          "siteId": "patosilta_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.02132,
+          "lon": 25.483478
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBhdG9zaWx0YV80",
+          "siteId": "patosilta_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.02132,
+          "lon": 25.483478
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGE=",
+      "siteId": "erkkolansilta",
+      "name": "Erkkolan silta",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfMQ==",
+          "siteId": "erkkolansilta_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.019,
+          "lon": 25.534323
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfMg==",
+          "siteId": "erkkolansilta_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.019,
+          "lon": 25.534323
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfMw==",
+          "siteId": "erkkolansilta_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.019,
+          "lon": 25.534323
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmVya2tvbGFuc2lsdGFfNA==",
+          "siteId": "erkkolansilta_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.019,
+          "lon": 25.534323
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aQ==",
+      "siteId": "raatti",
+      "name": "Raatti",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV8x",
+          "siteId": "raatti_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.018652,
+          "lon": 25.464398
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV8y",
+          "siteId": "raatti_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.018652,
+          "lon": 25.464398
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV8z",
+          "siteId": "raatti_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.018652,
+          "lon": 25.464398
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhYXR0aV80",
+          "siteId": "raatti_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.018652,
+          "lon": 25.464398
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYQ==",
+      "siteId": "maikkulan-baana",
+      "name": "Maikkulan baana",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV8x",
+          "siteId": "maikkulan-baana_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.006129,
+          "lon": 25.495483
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV8y",
+          "siteId": "maikkulan-baana_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.006129,
+          "lon": 25.495483
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV8z",
+          "siteId": "maikkulan-baana_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.006129,
+          "lon": 25.495483
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Om1haWtrdWxhbi1iYWFuYV80",
+          "siteId": "maikkulan-baana_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.006129,
+          "lon": 25.495483
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWU=",
+      "siteId": "poikkimaantie",
+      "name": "Poikkimaantie",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfMQ==",
+          "siteId": "poikkimaantie_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 64.999391,
+          "lon": 25.560913
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfMg==",
+          "siteId": "poikkimaantie_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 64.999391,
+          "lon": 25.560913
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfMw==",
+          "siteId": "poikkimaantie_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 64.999391,
+          "lon": 25.560913
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBvaWtraW1hYW50aWVfNA==",
+          "siteId": "poikkimaantie_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 64.999391,
+          "lon": 25.560913
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGE=",
+      "siteId": "karjasilta",
+      "name": "Karjasilta",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfMQ==",
+          "siteId": "karjasilta_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.001842,
+          "lon": 25.480784
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfMg==",
+          "siteId": "karjasilta_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.001842,
+          "lon": 25.480784
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfMw==",
+          "siteId": "karjasilta_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.001842,
+          "lon": 25.480784
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5Omthcmphc2lsdGFfNA==",
+          "siteId": "karjasilta_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.001842,
+          "lon": 25.480784
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYQ==",
+      "siteId": "hollihaka",
+      "name": "Hollihaka",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV8x",
+          "siteId": "hollihaka_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.010398,
+          "lon": 25.455607
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV8y",
+          "siteId": "hollihaka_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.010398,
+          "lon": 25.455607
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV8z",
+          "siteId": "hollihaka_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.010398,
+          "lon": 25.455607
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmhvbGxpaGFrYV80",
+          "siteId": "hollihaka_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.010398,
+          "lon": 25.455607
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YQ==",
+      "siteId": "pikisaarensilta",
+      "name": "Pikisaarensilta",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV8x",
+          "siteId": "pikisaarensilta_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.015177,
+          "lon": 25.461951
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV8y",
+          "siteId": "pikisaarensilta_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.015177,
+          "lon": 25.461951
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV8z",
+          "siteId": "pikisaarensilta_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.015177,
+          "lon": 25.461951
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnBpa2lzYWFyZW5zaWx0YV80",
+          "siteId": "pikisaarensilta_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.015177,
+          "lon": 25.461951
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdQ==",
+      "siteId": "etelainen-alikulku",
+      "name": "Eteläinen alikulku",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV8x",
+          "siteId": "etelainen-alikulku_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.007616,
+          "lon": 25.480427
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV8y",
+          "siteId": "etelainen-alikulku_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.007616,
+          "lon": 25.480427
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV8z",
+          "siteId": "etelainen-alikulku_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.007616,
+          "lon": 25.480427
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmV0ZWxhaW5lbi1hbGlrdWxrdV80",
+          "siteId": "etelainen-alikulku_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.007616,
+          "lon": 25.480427
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGll",
+      "siteId": "limingantie",
+      "name": "Limingantie",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzE=",
+          "siteId": "limingantie_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 64.995718,
+          "lon": 25.464124
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzI=",
+          "siteId": "limingantie_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 64.995718,
+          "lon": 25.464124
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzM=",
+          "siteId": "limingantie_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 64.995718,
+          "lon": 25.464124
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OmxpbWluZ2FudGllXzQ=",
+          "siteId": "limingantie_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 64.995718,
+          "lon": 25.464124
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGE=",
+      "siteId": "rautasilta",
+      "name": "Rautasilta",
+      "domain": "Oulu_Kapy",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 0,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfMQ==",
+          "siteId": "rautasilta_1",
+          "name": "JK_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.021535,
+          "lon": 25.496036
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfMg==",
+          "siteId": "rautasilta_2",
+          "name": "JK_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.021535,
+          "lon": 25.496036
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfMw==",
+          "siteId": "rautasilta_3",
+          "name": "PP_IN",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 1,
+          "lat": 65.021535,
+          "lon": 25.496036
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9LYXB5OnJhdXRhc2lsdGFfNA==",
+          "siteId": "rautasilta_4",
+          "name": "PP_OUT",
+          "domain": "Oulu_Kapy",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 0,
+          "sens": 2,
+          "lat": 65.021535,
+          "lon": 25.496036
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06TEkwM0xW",
+      "siteId": "LI03LV",
+      "name": "Liminka/Ouluntie (mt847)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06TEkwM0xWX0cyX0cx",
+          "siteId": "LI03LV_G2_G1",
+          "name": "G2_G1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 64.863528,
+          "lon": 25.501806
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06TEkwM0xWX0czMV9HMzA=",
+          "siteId": "LI03LV_G31_G30",
+          "name": "G31_G30",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 64.863528,
+          "lon": 25.501806
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE4MA==",
+      "siteId": "OULU180",
+      "name": "Äimärautio (Limingantie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE4MF9iMzFfMl9iMzBfMjpjMzFfMl9jMzBfMg==",
+          "siteId": "OULU180_b31_2_b30_2:c31_2_c30_2",
+          "name": "b31_2_b30_2:c31_2_c30_2",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 64.985767,
+          "lon": 25.474621
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE4MF9iMzBfMl9iMzFfMjpjMzBfMl9jMzFfMg==",
+          "siteId": "OULU180_b30_2_b31_2:c30_2_c31_2",
+          "name": "b30_2_b31_2:c30_2_c31_2",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 64.985767,
+          "lon": 25.474621
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA5OQ==",
+      "siteId": "OULU099",
+      "name": "Myllytulli (Tulliväylä)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA5OV9QUDE3XzE4",
+          "siteId": "OULU099_PP17_18",
+          "name": "PP17_18",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.019203,
+          "lon": 25.493891
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA5OV9QUDE4XzE3",
+          "siteId": "OULU099_PP18_17",
+          "name": "PP18_17",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.019203,
+          "lon": 25.493891
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Mg==",
+      "siteId": "OULU192",
+      "name": "Kynsilehto (Parkkisenkankaantie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Ml9wcDE4XzE3",
+          "siteId": "OULU192_pp18_17",
+          "name": "pp18_17",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.030845,
+          "lon": 25.55401
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Ml9wcDIwXzE5",
+          "siteId": "OULU192_pp20_19",
+          "name": "pp20_19",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.030845,
+          "lon": 25.55401
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTY3",
+      "siteId": "OULU67",
+      "name": "Taka-Lyötty (Leevi Madetojan katu länsipuoli)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTY3X3BwMTNfMTQ=",
+          "siteId": "OULU67_pp13_14",
+          "name": "pp13_14",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.002409,
+          "lon": 25.479601
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTY3X3BwMTVfMTY=",
+          "siteId": "OULU67_pp15_16",
+          "name": "pp15_16",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.002409,
+          "lon": 25.479601
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Mw==",
+      "siteId": "OULU193",
+      "name": "Rusko (Raitotie/Konetie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5M19QUEFfMQ==",
+          "siteId": "OULU193_PPA_1",
+          "name": "PPA_1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.041885,
+          "lon": 25.542825
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5M19QUEFfMg==",
+          "siteId": "OULU193_PPA_2",
+          "name": "PPA_2",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.041885,
+          "lon": 25.542825
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Ng==",
+      "siteId": "OULU196",
+      "name": "Rusko (Raitotie/Kiilletie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Nl9jMzBfYzMx",
+          "siteId": "OULU196_c30_c31",
+          "name": "c30_c31",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.047079,
+          "lon": 25.534079
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Nl9kMzBfZDMx",
+          "siteId": "OULU196_d30_d31",
+          "name": "d30_d31",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.047079,
+          "lon": 25.534079
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzMw==",
+      "siteId": "OULU133",
+      "name": "Höyhtyä (Lintulammentie/Latokartanontie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzM19wcDEzXzE0",
+          "siteId": "OULU133_pp13_14",
+          "name": "A31_2_A30_2_IN",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 64.996619,
+          "lon": 25.48526
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzM19wcDE1XzE2",
+          "siteId": "OULU133_pp15_16",
+          "name": "A31_1_A30_1_OUT",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 64.996619,
+          "lon": 25.48526
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEwOA==",
+      "siteId": "OULU108",
+      "name": "Välivainio (Sorvarintie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEwOF9QUDQxXzQy",
+          "siteId": "OULU108_PP41_42",
+          "name": "PP41_42",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.029674,
+          "lon": 25.478412
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEwOF9QUDQyXzQx",
+          "siteId": "OULU108_PP42_41",
+          "name": "PP42_41",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.029674,
+          "lon": 25.478412
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3Ng==",
+      "siteId": "OULU176",
+      "name": "Kuivasjärvi (Raitotie/Kalikkatie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3Nl9QUF9BMjlfQTMwX19B",
+          "siteId": "OULU176_PP_A29_A30__A",
+          "name": "PP_A29_A30__A",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 7,
+          "lat": 65.067715,
+          "lon": 25.494297
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3Nl9QUF9CMjlfQjMwX19C",
+          "siteId": "OULU176_PP_B29_B30__B",
+          "name": "PP_B29_B30__B",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 9,
+          "lat": 65.067715,
+          "lon": 25.494297
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNQ==",
+      "siteId": "OULU135",
+      "name": "Höyhtyä (Lintulammentie/Sorsatie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNV9wcDEzXzE0",
+          "siteId": "OULU135_pp13_14",
+          "name": "B31_2_B30_2_IN",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 64.992932,
+          "lon": 25.489508
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNV9wcDE1XzE2",
+          "siteId": "OULU135_pp15_16",
+          "name": "B31_1_B30_1_OUT",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 64.992932,
+          "lon": 25.489508
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5MQ==",
+      "siteId": "OULU191",
+      "name": "Myllyoja (Vaalantie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5MV9QUEFfMg==",
+          "siteId": "OULU191_PPA_2",
+          "name": "PPA_2",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.020244,
+          "lon": 25.553529
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5MV9QUEFfMQ==",
+          "siteId": "OULU191_PPA_1",
+          "name": "PPA_1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.020244,
+          "lon": 25.553529
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NQ==",
+      "siteId": "OULU175",
+      "name": "Kuivasjärvi (Raitotie/Pöllöntie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NV9wcF9hMjlfYTMw",
+          "siteId": "OULU175_pp_a29_a30",
+          "name": "pp_a29_a30",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 7,
+          "lat": 65.065897,
+          "lon": 25.503838
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NV9wcF9iMjlfYjMw",
+          "siteId": "OULU175_pp_b29_b30",
+          "name": "pp_b29_b30",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 9,
+          "lat": 65.065897,
+          "lon": 25.503838
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzOQ==",
+      "siteId": "OULU139",
+      "name": "Kaakkuri (Kaakkurinpolku)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzOV9QUF9QMTFfUDEy",
+          "siteId": "OULU139_PP_P11_P12",
+          "name": "PP_P11_P12",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 64.95853,
+          "lon": 25.529357
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzOV9QUF9QOV9QMTA=",
+          "siteId": "OULU139_PP_P9_P10",
+          "name": "PP_P9_P10",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 64.95853,
+          "lon": 25.529357
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UxM0xW",
+      "siteId": "KE13LV",
+      "name": "Kempele/Zatelliitti (Komeetantie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UxM0xWX1BQM19QUDQ=",
+          "siteId": "KE13LV_PP3_PP4",
+          "name": "PP3_PP4",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 7,
+          "lat": 64.918603,
+          "lon": 25.540077
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UxM0xWX1BQNF9QUDM=",
+          "siteId": "KE13LV_PP4_PP3",
+          "name": "PP4_PP3",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 9,
+          "lat": 64.918603,
+          "lon": 25.540077
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDE=",
+      "siteId": "KI001",
+      "name": "Laivakankaantie (vt 20)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDFfRkcyMF8yMQ==",
+          "siteId": "KI001_FG20_21",
+          "name": "FG20_21",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.084341,
+          "lon": 25.672024
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDFfRkcyMV8yMA==",
+          "siteId": "KI001_FG21_20",
+          "name": "FG21_20",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.084341,
+          "lon": 25.672024
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NA==",
+      "siteId": "OULU174",
+      "name": "Kuivasjärvi (Raitotie/Alakyläntie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDFfUFAy",
+          "siteId": "OULU174_PP1_PP2",
+          "name": "PP1_PP2",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.062924,
+          "lon": 25.509751
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDJfUFAx",
+          "siteId": "OULU174_PP2_PP1",
+          "name": "PP2_PP1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.062924,
+          "lon": 25.509751
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDVfUFA2",
+          "siteId": "OULU174_PP5_PP6",
+          "name": "PP5_PP6",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 9,
+          "lat": 65.062701,
+          "lon": 25.513529
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3NF9QUDZfUFA1",
+          "siteId": "OULU174_PP6_PP5",
+          "name": "PP6_PP5",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 7,
+          "lat": 65.062701,
+          "lon": 25.513529
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE0Mw==",
+      "siteId": "OULU143",
+      "name": "Oulunlahti (Limingantie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE0M19QSUxPVF9OT1JNX0lOOlBQX0RlbWFuZF9IMV9JTg==",
+          "siteId": "OULU143_PILOT_NORM_IN:PP_Demand_H1_IN",
+          "name": "PILOT_NORM_IN:PP_Demand_H1_IN",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 64.974235,
+          "lon": 25.487878
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE0M19QSUxPVF9OT1JNX09VVDpQUF9EZW1hbmRfSDE=",
+          "siteId": "OULU143_PILOT_NORM_OUT:PP_Demand_H1",
+          "name": "PILOT_NORM_OUT:PP_Demand_H1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 64.974235,
+          "lon": 25.487878
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UwMDc=",
+      "siteId": "KE007",
+      "name": "Kempele/Paituri (mt847)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UwMDdfUFBfRGVtYW5kX0hB",
+          "siteId": "KE007_PP_Demand_HA",
+          "name": "PP_Demand_HA",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 64.928351,
+          "lon": 25.511249
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0UwMDdfUFBfRGVtYW5kX0hC",
+          "siteId": "KE007_PP_Demand_HB",
+          "name": "PP_Demand_HB",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 64.928351,
+          "lon": 25.511249
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5Nw==",
+      "siteId": "OULU197",
+      "name": "Saarela (Vaalantie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5N19BMTRfMV9BMTVfMQ==",
+          "siteId": "OULU197_A14_1_A15_1",
+          "name": "A14_1_A15_1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.001728,
+          "lon": 25.585062
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE5N19BMTRfMl9BMTVfMg==",
+          "siteId": "OULU197_A14_2_A15_2",
+          "name": "A14_2_A15_2",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.001728,
+          "lon": 25.585062
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA1OQ==",
+      "siteId": "OULU059",
+      "name": "Kastelli (Oulunsuuntie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA1OV9CMjlfMV9CMzBfMTpBMjlfMV9BMzBfMQ==",
+          "siteId": "OULU059_B29_1_B30_1:A29_1_A30_1",
+          "name": "B29_1_B30_1:A29_1_A30_1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.006614,
+          "lon": 25.528525
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTA1OV9CMzBfMV9CMjlfMTpBMzBfMV9BMjlfMQ==",
+          "siteId": "OULU059_B30_1_B29_1:A30_1_A29_1",
+          "name": "B30_1_B29_1:A30_1_A29_1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.006614,
+          "lon": 25.528525
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTExNQ==",
+      "siteId": "OULU115",
+      "name": "Lipporannantie",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTExNV9BMjlfQTMw",
+          "siteId": "OULU115_A29_A30",
+          "name": "A29_A30",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.030583,
+          "lon": 25.449576
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTExNV9CMTlfQjIw",
+          "siteId": "OULU115_B19_B20",
+          "name": "B19_B20",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.030583,
+          "lon": 25.449576
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3MA==",
+      "siteId": "OULU170",
+      "name": "Toppila (Koskelantie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3MF9QUDlfMjlfMzA6UFAxNF8yOV8zMA==",
+          "siteId": "OULU170_PP9_29_30:PP14_29_30",
+          "name": "PP9_29_30:PP14_29_30",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.038313,
+          "lon": 25.442646
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTE3MF9QUDlfMzBfMjk6UFAxNF8zMF8yOQ==",
+          "siteId": "OULU170_PP9_30_29:PP14_30_29",
+          "name": "PP9_30_29:PP14_30_29",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.038313,
+          "lon": 25.442646
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNA==",
+      "siteId": "OULU134",
+      "name": "Karjasilta (Joutsentie/Paljetie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNF9CMzBfMl9CMjlfMl9JTg==",
+          "siteId": "OULU134_B30_2_B29_2_IN",
+          "name": "B30_2_B29_2_IN",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 7,
+          "lat": 64.998889,
+          "lon": 25.4775
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTEzNF9CMzBfMV9CMjlfMV9PVVQ=",
+          "siteId": "OULU134_B30_1_B29_1_OUT",
+          "name": "B30_1_B29_1_OUT",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 9,
+          "lat": 64.998889,
+          "lon": 25.4775
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTAzNA==",
+      "siteId": "OULU034",
+      "name": "Limingantulli (Limingantie/Kempeleentie)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTAzNF9BXzMwXzJfQV8zMF8x",
+          "siteId": "OULU034_A_30_2_A_30_1",
+          "name": "A_30_2_A_30_1",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.00025,
+          "lon": 25.4635
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06T1VMVTAzNF9BXzMwXzFfQV8zMF8y",
+          "siteId": "OULU034_A_30_1_A_30_2",
+          "name": "A_30_1_A_30_2",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.00025,
+          "lon": 25.4635
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDM=",
+      "siteId": "KI003",
+      "name": "Ylikiimingintie (vt20)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDNfSDI5X0gzMA==",
+          "siteId": "KI003_H29_H30",
+          "name": "H29_H30",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.063742,
+          "lon": 25.635628
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDNfRzI5X0czMA==",
+          "siteId": "KI003_G29_G30",
+          "name": "G29_G30",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.063742,
+          "lon": 25.635628
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDI=",
+      "siteId": "KI002",
+      "name": "Jäälintie (vt 20)",
+      "domain": "Oulu_TPM",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 5,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDJfUFBfRkcxNQ==",
+          "siteId": "KI002_PP_FG15",
+          "name": "PP_FG15",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 6,
+          "lat": 65.094025,
+          "lon": 25.682118
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9UUE06S0kwMDJfUFBfR0YxNQ==",
+          "siteId": "KI002_PP_GF15",
+          "name": "PP_GF15",
+          "domain": "Oulu_TPM",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 5,
+          "sens": 8,
+          "lat": 65.094025,
+          "lon": 25.682118
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0",
+      "siteId": "300062134",
+      "name": "Herukka (mt 847)",
+      "domain": "Oulu_ELY",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 15,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzA=",
+          "siteId": "300062134_0",
+          "name": "PP_IN",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.107694,
+          "lon": 25.390413
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzE=",
+          "siteId": "300062134_1",
+          "name": "PP_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.107694,
+          "lon": 25.390413
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzI=",
+          "siteId": "300062134_2",
+          "name": "JK_IN",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.107694,
+          "lon": 25.390413
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDYyMTM0XzM=",
+          "siteId": "300062134_3",
+          "name": "JK_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.107694,
+          "lon": 25.390413
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1",
+      "siteId": "300044495",
+      "name": "Kiiminki (vt 20 / mt 848)",
+      "domain": "Oulu_ELY",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 60,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzA=",
+          "siteId": "300044495_0",
+          "name": "PP_IN",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.127728,
+          "lon": 25.774734
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzE=",
+          "siteId": "300044495_1",
+          "name": "PP_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.127728,
+          "lon": 25.774734
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzI=",
+          "siteId": "300044495_2",
+          "name": "JK_IN",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.127728,
+          "lon": 25.774734
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk1XzM=",
+          "siteId": "300044495_3",
+          "name": "JK_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.127728,
+          "lon": 25.774734
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2",
+      "siteId": "300044496",
+      "name": "Haukipudas/Kiiminkijoki (mt 847)",
+      "domain": "Oulu_ELY",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 60,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzA=",
+          "siteId": "300044496_0",
+          "name": "PP_IN",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.178379,
+          "lon": 25.355472
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzE=",
+          "siteId": "300044496_1",
+          "name": "PP_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.178379,
+          "lon": 25.355472
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzI=",
+          "siteId": "300044496_2",
+          "name": "JK_IN",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.178379,
+          "lon": 25.355472
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk2XzM=",
+          "siteId": "300044496_3",
+          "name": "JK_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.178379,
+          "lon": 25.355472
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3",
+      "siteId": "300044497",
+      "name": "Kuusamontie/Laanila (vt 20)",
+      "domain": "Oulu_ELY",
+      "userType": 12,
+      "timezone": "UTC",
+      "interval": 15,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzA=",
+          "siteId": "300044497_0",
+          "name": "PP_IN",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.026569,
+          "lon": 25.51208
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzE=",
+          "siteId": "300044497_1",
+          "name": "PP_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.026569,
+          "lon": 25.51208
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzI=",
+          "siteId": "300044497_2",
+          "name": "JK_IN",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.026569,
+          "lon": 25.51208
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk3XzM=",
+          "siteId": "300044497_3",
+          "name": "JK_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 1,
+          "timezone": "UTC",
+          "interval": 15,
+          "sens": 0,
+          "lat": 65.026569,
+          "lon": 25.51208
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg0",
+      "siteId": "300044484",
+      "name": "Lentokentäntie (mt 815)",
+      "domain": "Oulu_ELY",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 60,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg0XzA=",
+          "siteId": "300044484_0",
+          "name": "PP_IN",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 64.950887,
+          "lon": 25.492349
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg0XzE=",
+          "siteId": "300044484_1",
+          "name": "PP_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 64.950887,
+          "lon": 25.492349
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk0",
+      "siteId": "300044494",
+      "name": "Hakamaa (mt 847)",
+      "domain": "Oulu_ELY",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 60,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk0XzA=",
+          "siteId": "300044494_0",
+          "name": "PP_IN",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 64.939625,
+          "lon": 25.51565
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDk0XzE=",
+          "siteId": "300044494_1",
+          "name": "PP_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 64.939625,
+          "lon": 25.51565
+        }
+      ]
+    },
+    {
+      "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg4",
+      "siteId": "300044488",
+      "name": "Kuusamontie/Korvenkylä (vt 20)",
+      "domain": "Oulu_ELY",
+      "userType": 2,
+      "timezone": "UTC",
+      "interval": 60,
+      "sens": 0,
+      "channels": [
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg4XzA=",
+          "siteId": "300044488_0",
+          "name": "PP_IN",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.062827,
+          "lon": 25.633072
+        },
+        {
+          "id": "RWNvQ291bnRlclNpdGU6T3VsdV9FTFk6MzAwMDQ0NDg4XzE=",
+          "siteId": "300044488_1",
+          "name": "PP_OUT",
+          "domain": "Oulu_ELY",
+          "userType": 2,
+          "timezone": "UTC",
+          "interval": 60,
+          "sens": 0,
+          "lat": 65.062827,
+          "lon": 25.633072
+        }
+      ]
+    },
+    null
+  ]
+}

@@ -14,6 +14,9 @@ DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 FMI_WFS_BASE = "https://opendata.fmi.fi/wfs"
 OBS_STORED_QUERY = "fmi::observations::weather::timevaluepair"
 PARAM_MAP = {"t2m": "temp_c"} 
+# Get the root parent directory
+ROOT_PARENT_FOLDER = Path(__file__).parent.parent
+WEATHER_DATA_BASE_PATH = ROOT_PARENT_FOLDER / "data" / "weather"
 
 def fetch_chunk(starttime: datetime, endtime: datetime) -> pd.DataFrame:
     params = {
@@ -60,7 +63,7 @@ def fetch_chunk(starttime: datetime, endtime: datetime) -> pd.DataFrame:
 
 def repair_nan_values():
     """Finds NaN values in existing JSONs and tries to refetch them."""
-    base_dir = Path(__file__).parent / "data"
+    base_dir = WEATHER_DATA_BASE_PATH / "default"
     folders = ["training", "validation", "testing"]
     
     print("--- Starting Weather Data Repair ---")
@@ -105,7 +108,7 @@ def repair_nan_values():
         print(f"💾 {folder}: Saved updated file.")
 
 def run_builder():
-    base_dir = Path(__file__).parent / "data"
+    base_dir = WEATHER_DATA_BASE_PATH / "default"
     
     if (base_dir / "training" / "weather_train.json").exists():
         print("Existing data found.")

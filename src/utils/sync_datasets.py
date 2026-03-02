@@ -4,14 +4,15 @@ import numpy as np
 from pathlib import Path
 
 def edit_files_in_place():
-    base_dir = Path(__file__).resolve().parent / "data"
+    base_dir_pedestrians = Path(__file__).resolve().parent / "data" / "pedestrians" / "default"
+    base_dir_weather = Path(__file__).resolve().parent / "data" / "weather" / "default"
     splits = ["train", "val", "test"]
     folders = {"train": "training", "val": "validation", "test": "testing"}
 
     for split in splits:
         folder = folders[split]
-        ped_path = base_dir / folder / f"pedestrians_{split}.json"
-        wea_path = base_dir / folder / f"weather_{split}.json"
+        ped_path = base_dir_pedestrians / folder / f"pedestrians_{split}.json"
+        wea_path = base_dir_weather / folder / f"weather_{split}.json"
 
         if not ped_path.exists() or not wea_path.exists():
             continue

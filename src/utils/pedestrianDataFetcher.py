@@ -17,10 +17,52 @@ STEP = "hour"
 #LOCATION
 DOMAIN = "Oulu_kaupunki"
 
-# SITE ID
-ID = "100025213" # Kempele/Asemantie
+# SITE SITE_ID
+SITE_ID = "100025213" # Kempele/Asemantie
+
+# Get the root parent directory
+ROOT_PARENT_FOLDER = Path(__file__).parent.parent
+
+# PEDESTRIAN DATA
+
+PEDESTRIAN_DATA_BASE_PATH = ROOT_PARENT_FOLDER / "data" / "pedestrians"
+
+
 
 URL = "https://api.oulunliikenne.fi/proxy/graphql"
+
+def renderSiteDetails(site, renderChannels=False):
+    if site is None:
+        return "Site data is None"
+    channels = site.get("channels", [])
+    details = f"Name: {site['name']}, Domain: {site['domain']}, Site SITE_ID: {site['siteId']},"
+    channelIndex = 1
+    if renderChannels:
+        details += f"\nAvailable Channels ({len(channels)}):" + "\n"
+        for ch in channels:
+            details += f"#{channelIndex}: {renderSiteDetails(ch)}\n"
+            channelIndex += 1
+    return details
+
+def saveSitesListJson():
+    sitesRaw = fetchAllEcoCounterSites()
+    sites = sitesRaw["ecoCounterSites"]
+    base_dir = PEDESTRIAN_DATA_BASE_PATH
+    file_path = base_dir / "ecoCounterSites.json"
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(sites, f, indent=2, ensure_ascii=False)
+    print(f"Saved list of sites to {file_path}")
+def getAndPrintListOfSites():
+    sitesRaw = fetchAllEcoCounterSites()
+    sites = sitesRaw["ecoCounterSites"]
+    index = 1
+    for site in sites:
+        if(site is None):
+            continue
+        print(f"--- Site {index} ---")
+        print(renderSiteDetails(site, renderChannels=True))
+        index += 1
+    return sites
 
 def fetchAllEcoCounterSites():
     """Fetches metadata for all eco counter sites from the API."""
@@ -92,7 +134,7 @@ def fetchAllEcoCounterSites():
 
     return data["data"]
 
-def fetchEcoCounterSiteData(id=ID, domain=DOMAIN, step=STEP, begin=START_DATE, end=END_DATE):
+def fetchEcoCounterSiteData(id=SITE_ID, domain=DOMAIN, step=STEP, begin=START_DATE, end=END_DATE):
     """Fetches eco counter site data for given site in chunks to avoid timeouts and memory issues."""
     start_dt = datetime.strptime(begin, DATE_FORMAT)
     end_dt = datetime.strptime(end, DATE_FORMAT)
@@ -131,6 +173,7 @@ def fetchEcoCounterSiteData(id=ID, domain=DOMAIN, step=STEP, begin=START_DATE, e
                 print(f"  [+] Found {len(chunk_data)} rows for {current_start.year}")
             else:
                 print(f"  [-] No data for {current_start.year} (skipping...)")
+                raise ValueError(f"Insufficient data. No data for {current_start.year}")
         
         current_start = current_end
         time.sleep(0.2)
@@ -146,11 +189,11 @@ def fetchEcoCounterSiteData(id=ID, domain=DOMAIN, step=STEP, begin=START_DATE, e
     print(f"Total rows retrieved: {len(all_counts)}")
     return all_counts
 
-def storeSplitJson(rows):
+def storeSplitJson(rows, site_id=SITE_ID):
     """
     Splits the fetched data into 60/20/20 datasets.
     """
-    base_dir = Path(__file__).parent / "data"
+    base_dir = PEDESTRIAN_DATA_BASE_PATH / "sites" / site_id
     
     total_rows = len(rows)
     if total_rows == 0:
@@ -177,26 +220,28 @@ def storeSplitJson(rows):
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(payload, f, indent=2, ensure_ascii=False)
         
-        print(f"Saved {len(subset)} rows to {folder}/{filename} (First: {subset[0]['date']})")
+        print(f"Saved {len(subset)} rows to {file_path} (First: {subset[0]['date']})")
 
-def check_files_exist():
-    base_dir = Path(__file__).parent / "data"
+def check_files_exist(site_id=SITE_ID):
+    base_dir = PEDESTRIAN_DATA_BASE_PATH / "sites" / site_id
     files = [
         base_dir / "training" / "pedestrians_train.json",
         base_dir / "validation" / "pedestrians_val.json",
         base_dir / "testing" / "pedestrians_test.json"
     ]
     return all(f.exists() for f in files)
-
-if __name__ == "__main__":
+def main():
     try:
         if check_files_exist():
-            choice = input("Pedestrian files already exist. Do you want to refetch? (y/[N]): ").strip().lower()
+            choice = input("Pedestrian files already exist for the requested site. Do you want to refetch? (y/[N]): ").strip().lower()
             if choice != 'y':
                 print("Using existing files. Execution complete!")
                 sys.exit(0)
 
-        data = fetchEcoCounterSiteData()
-        storeSplitJson(data)
+        data = fetchEcoCounterSiteData(SITE_ID, DOMAIN, STEP, START_DATE, END_DATE)
+        storeSplitJson(data, site_id=SITE_ID)
     except Exception as e:
         print(f"An error occurred: {e}")
+if __name__ == "__main__":
+    #main()
+    sys.exit(0)

@@ -9,63 +9,73 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
+from utils.forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
+from utils.pedestrianDataFetcher import check_files_exist, fetchEcoCounterSiteData, getAndPrintListOfSites, storeSplitJson
 
 # INSTRUCTIONS
+# JUST RUN THIS APP.PY AND FOLLOW THE PROMPTS IN THE CONSOLE.
 #
-# DEFAULT_MODEL
-DEFAULT_MODEL = 1  # 1 for  Random Forest (more accurate but slower), 2 for for Linear Regression
 #
-# 1. SET THESE TWO TO THE DATE TIME RANGE YOU WANT TO PREDICT FOR 
-# 2. AND JUST RUN THE APP.PY TO SEE THE PREDICTIONS AND GRAPH
+# DEFAULT MACHINE LEARNING MODEL
+# 1 Random Forest (more accurate but slower)
+# 2 Linear Regression
+DEFAULT_MODEL = 1
+
+################################################################################################
+# DO NOT TOUCH ANYTHING BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
+################################################################################################
 #
 # TEST RANGE FOR NOW IS 2026-02-25 00:00 to 2026-03-02 23:59 (full days with metrics), weather forecast includes only this date range.
 #
 # ENSURE THE FORMAT IS "YYYY-MM-DD HH:MM:SS" AND THE TIMEZONE IS LOCAL (Europe/Helsinki)
 
 # FOR A FULL DAY START WITH MIDNIGHT AND END WITH MIDNIGHT OF THE NEXT DAY, OTHERWISE THE LAST HOUR MAY BE CUT OFF IN THE GRAPH (BECAUSE OF HOURLY ALIGNMENT)
-TEST_DATE_START = "2026-03-05 00:00:00"
+DEFAULT_TEST_DATE_START = "2026-03-05 00:00:00"
 
-TEST_DATE_END = "2026-03-06 00:00:00"
-
-#TEST_DATE_START = "2026-03-05 00:00:00"
-
-#TEST_DATE_END = "2026-03-06 00:00:00"
+DEFAULT_TEST_DATE_END = "2026-03-06 00:00:00"
 
 # DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
 #
 ################################################################################################
-# OLD HARDCODED TEST VALUES (FOR QUICK TESTING WITHOUT FORECAST)
-TEST_TEMPERATURE = -20
 
-TEST_SITE_NAME = "Kempele/Asemantie" 
+DEFAULT_SITE_ID = "100025213" # Kempele/Asemantie
+DEFAULT_TEST_SITE_NAME = "Kempele/Asemantie" 
+
+# OLD HARDCODED TEST VALUES (FOR QUICK TESTING WITHOUT FORECAST)
+DEFAULT_TEST_TEMPERATURE = -20
 
 # Get the directory where this script is located
-SCRIPT_DIR = Path(__file__).parent
+ROOT_PARENT_FOLDER = Path(__file__).parent
 
-# MODIFY THESE PATHS BELOW TWO TO POINT TO YOUR DATA JSON FILES
+# PEDESTRIAN DATA
+
+PEDESTRIAN_DATA_BASE_PATH = ROOT_PARENT_FOLDER / "data" / "pedestrians"
 
 # ENSURE THE FILENAME ACTUALLY EXISTS
-TRAINING_PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "training" / "pedestrians_train.json"
+DEFAULT_TRAINING_PEDESTRIAN_JSON_PATH = PEDESTRIAN_DATA_BASE_PATH / "default" / "training" / "pedestrians_train.json"
 
+# ENSURE THE FILENAME ACTUALLY EXISTS
+DEFAULT_TESTING_PEDESTRIAN_JSON_PATH = PEDESTRIAN_DATA_BASE_PATH /  "default" /  "testing" / "pedestrians_test.json"
+
+# ENSURE THE FILENAME ACTUALLY EXISTS
+DEFAULT_VALIDATION_PEDESTRIAN_JSON_PATH = PEDESTRIAN_DATA_BASE_PATH / "default" / "validation" / "pedestrians_val.json"
+
+
+
+# WEATHER DATA
+WEATHER_DATA_BASE_PATH = ROOT_PARENT_FOLDER / "data" / "weather" 
 # This is the historical data for TRAINING
-TRAINING_HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "training" / "weather_train.json"
-
-# ENSURE THE FILENAME ACTUALLY EXISTS
-TESTING_PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "testing" / "pedestrians_test.json"
+TRAINING_HISTORICAL_WEATHER_PATH = WEATHER_DATA_BASE_PATH /  "default" / "training" / "weather_train.json"
 
 # This is the historical data for TESTING
-TESTING_HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "testing" / "weather_test.json"
-
-# ENSURE THE FILENAME ACTUALLY EXISTS
-VALIDATION_PEDESTRIAN_JSON_PATH = SCRIPT_DIR / "data" / "validation" / "pedestrians_val.json"
+TESTING_HISTORICAL_WEATHER_PATH = WEATHER_DATA_BASE_PATH /  "default" / "testing" / "weather_test.json"
 
 # This is the historical data for VALIDATION
-VALIDATION_HISTORICAL_WEATHER_PATH = SCRIPT_DIR / "data" / "validation" / "weather_val.json"
+VALIDATION_HISTORICAL_WEATHER_PATH = WEATHER_DATA_BASE_PATH /  "default" / "validation" / "weather_val.json"
 
+# Weather forecast data
 # ENSURE THE FILENAME ACTUALLY EXISTS
-WEATHER_JSON_PATH = SCRIPT_DIR / "data" / "weather_forecast.json"
-
+WEATHER_FORECAST_JSON_PATH = WEATHER_DATA_BASE_PATH /  "default" / "weather_forecast.json"
 # DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
 
 LOCAL_TZ = "Europe/Helsinki"
@@ -84,11 +94,11 @@ def ensure_forecast_data():
         payload = fmi.to_json_payload(df_forecast, loc)
         
         # Ensure directory exists and save
-        WEATHER_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with open(WEATHER_JSON_PATH, "w", encoding="utf-8") as f:
+        WEATHER_FORECAST_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(WEATHER_FORECAST_JSON_PATH, "w", encoding="utf-8") as f:
             json.dump(payload, f, indent=2)
             
-        print(f"[+] Forecast updated successfully: {WEATHER_JSON_PATH.name}")
+        print(f"[+] Forecast updated successfully: {WEATHER_FORECAST_JSON_PATH.name}")
     except Exception as e:
         print(f"[!] Could not update forecast: {e}")
         print("Attempting to proceed with existing file if available...")
@@ -125,6 +135,18 @@ def load_weather(weather_path: Path) -> pd.DataFrame:
 
     return df_w
 
+def load_pedestrians_training_data(site_id=DEFAULT_SITE_ID) -> pd.DataFrame:
+    # ENSURE THE FILENAME ACTUALLY EXISTS
+    path =  PEDESTRIAN_DATA_BASE_PATH / "sites" / site_id / "training" / "pedestrians_train.json"
+    return load_pedestrians(path)
+def load_pedestrians_validation_data(site_id=DEFAULT_SITE_ID) -> pd.DataFrame:
+    # ENSURE THE FILENAME ACTUALLY EXISTS
+    path =  PEDESTRIAN_DATA_BASE_PATH / "sites" / site_id / "validation" / "pedestrians_val.json"
+    return load_pedestrians(path)
+def load_pedestrians_testing_data(site_id=DEFAULT_SITE_ID) -> pd.DataFrame:
+    # ENSURE THE FILENAME ACTUALLY EXISTS
+    path =  PEDESTRIAN_DATA_BASE_PATH / "sites" / site_id / "testing" / "pedestrians_test.json"
+    return load_pedestrians(path)
 # Example of fetching bike rental stations, not used in baseline but can be useful for future work
 def load_pedestrians(ped_path: Path) -> pd.DataFrame:
     """
@@ -176,13 +198,13 @@ def time_based_split(df: pd.DataFrame, ts_col: str = "ts_hour", train_ratio: flo
 
 
 # Baseline model: linear regression on temperature + time features
-def processDataWithLinearRegression():
+def processDataWithLinearRegression(site_id=DEFAULT_SITE_ID):
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
-    train_df = load_pedestrians(TRAINING_PEDESTRIAN_JSON_PATH)
+    train_df = load_pedestrians_training_data(site_id=site_id)
     train_weather_df = load_weather(TRAINING_HISTORICAL_WEATHER_PATH)
  
 
-    test_df = load_pedestrians(TESTING_PEDESTRIAN_JSON_PATH)
+    test_df = load_pedestrians_testing_data(site_id)
     test_weather_df = load_weather(TESTING_HISTORICAL_WEATHER_PATH)
 
        # Join on hourly timestamp
@@ -222,13 +244,13 @@ def processDataWithLinearRegression():
     return model, featureColumns, coef, model.intercept_
 
 # Model: Random Forest regression on temperature + time features
-def processDataWithRandomForestRegression():
+def processDataWithRandomForestRegression(site_id=DEFAULT_SITE_ID):
     """Loads data, trains a Random Forest regressor, evaluates, and shows feature importances."""
-    train_df = load_pedestrians(TRAINING_PEDESTRIAN_JSON_PATH)
+    train_df = load_pedestrians_training_data(site_id=site_id)
     train_weather_df = load_weather(TRAINING_HISTORICAL_WEATHER_PATH)
  
 
-    test_df = load_pedestrians(TESTING_PEDESTRIAN_JSON_PATH)
+    test_df = load_pedestrians_testing_data(site_id)
     test_weather_df = load_weather(TESTING_HISTORICAL_WEATHER_PATH)
 
        # Join on hourly timestamp
@@ -271,13 +293,13 @@ def processDataWithRandomForestRegression():
    
     return model, featureColumns, coef, intercept
 # Baseline model: linear regression on temperature + time features
-def predictPedestrianCountAtHourWithTemp(requestedTime=TEST_DATE_START, requestedTemperature=TEST_TEMPERATURE, model    =DEFAULT_MODEL):
+def predictPedestrianCountAtHourWithTemp(site_id=DEFAULT_SITE_ID, requestedTime=DEFAULT_TEST_DATE_START, requestedTemperature=DEFAULT_TEST_TEMPERATURE, model    =DEFAULT_MODEL):
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
     if model == 1:
-        model, featureColumns, coef, intercept = processDataWithRandomForestRegression()
+        model, featureColumns, coef, intercept = processDataWithRandomForestRegression(site_id=site_id)
     else:
        
-        model, featureColumns, coef, intercept = processDataWithLinearRegression()
+        model, featureColumns, coef, intercept = processDataWithLinearRegression(site_id=site_id)
 
      # --- Example: predict for a chosen time + temperature ---
     # Suppose user asks: "At 2026-02-21 15:00 local time and temp is -7.0, how many pedestrians?"
@@ -352,15 +374,15 @@ def visualize_predictions(query_df: pd.DataFrame, title: str = "Pedestrian Count
     
     plt.show()
 
-def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE_START, endDateTime=TEST_DATE_END, requestedTemperature=TEST_TEMPERATURE, model=1):
-    """Placeholder for future prediction code over a date range."""
+def predictPedestrianCountAtTimeRangeWithTemp(site=None, startDateTime=DEFAULT_TEST_DATE_START, endDateTime=DEFAULT_TEST_DATE_END, requestedTemperature=DEFAULT_TEST_TEMPERATURE, model=DEFAULT_MODEL):
+    """Predicts pedestrian counts over a date range for given site and temperature using the trained model."""
    
 
     # First train the model on the historical data 
     if model == 1:
-        model, featureColumns, coef, intercept = processDataWithRandomForestRegression()
+        model, featureColumns, coef, intercept = processDataWithRandomForestRegression(site_id=site["siteId"])
     else:
-        model, featureColumns, coef, intercept = processDataWithLinearRegression()
+        model, featureColumns, coef, intercept = processDataWithLinearRegression(site_id=site["siteId"])
         
 
     # Then create a DataFrame for the requested date range and temperature, and predict pedestrian counts for each hour in that range
@@ -373,21 +395,21 @@ def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE_START, end
     
     # Visualize the predictions
     visualize_predictions(query_df, 
-                         title=f"Pedestrian ({startDateTime} to {endDateTime}) at {TEST_SITE_NAME}")
+                         title=f"Pedestrian ({startDateTime} to {endDateTime}) at {site['name']}")
     
 
 
-def predictPedestrianCountAtTimeRange(startDateTime=TEST_DATE_START, endDateTime=TEST_DATE_END, model=DEFAULT_MODEL):
-    """Predicts pedestrian counts over a date range using weather forecast data."""
+def predictPedestrianCountAtTimeRange(site, startDateTime=DEFAULT_TEST_DATE_START, endDateTime=DEFAULT_TEST_DATE_END, model=DEFAULT_MODEL):
+    """Predicts pedestrian counts over a date range for given site using weather forecast data."""
     
     # Load the forecast
-    forecast_df = load_weather(WEATHER_JSON_PATH)
+    forecast_df = load_weather(WEATHER_FORECAST_JSON_PATH)
 
     # First train the model on the historical data 
     if model == 1:
-        model, featureColumns, coef, intercept = processDataWithRandomForestRegression()
+        model, featureColumns, coef, intercept = processDataWithRandomForestRegression(site_id=site["siteId"])
     else:
-        model, featureColumns, coef, intercept = processDataWithLinearRegression()
+        model, featureColumns, coef, intercept = processDataWithLinearRegression(site_id=site["siteId"])
 
     # Create a DataFrame for the requested date range
     date_range = pd.date_range(start=startDateTime, end=endDateTime, freq="h", tz=LOCAL_TZ)
@@ -431,10 +453,44 @@ def predictPedestrianCountAtTimeRange(startDateTime=TEST_DATE_START, endDateTime
     
     # Visualize the predictions
     visualize_predictions(prediction_df, 
-                         title=f"Pedestrian Predictions ({startDateTime} to {endDateTime}) at {TEST_SITE_NAME}")
-
+                         title=f"Pedestrian Predictions ({startDateTime} to {endDateTime}) at {site['name']}")
+def getSiteDetailsByIndex(site_index, sites_list):
+    if 0 <= site_index < len(sites_list):
+        return sites_list[site_index]
+    return None
 
 def main():
-    predictPedestrianCountAtTimeRange(TEST_DATE_START, TEST_DATE_END, model=DEFAULT_MODEL)
+    try:
+        # Get and print the list of sites, ask user to select one by number, and fetch data for that site
+        sites = getAndPrintListOfSites()
+        selectedSite = None
+
+        # Keep asking until a valid site number is entered
+        while(selectedSite is None):
+        # Ask for the user to input a site number from the list of sites printed above
+            siteNumber = input("Enter the site number you want to fetch data for: ").strip()
+            selectedSite = getSiteDetailsByIndex(int(siteNumber) - 1, sites)
+            if not selectedSite or selectedSite["siteId"] is None:
+                print(f"Number {siteNumber} not found. Please check the list and try again.\n")
+                continue
+        print(f"Fetching data for site ID: {selectedSite['siteId']}...")
+    
+        # Check if files already exist for the selected site, if yes ask if user wants to refetch or use existing files
+        if check_files_exist(selectedSite["siteId"]):
+            choice = input(f"Pedestrian files already exist for the requested site number {selectedSite['siteId']}. Do you want to refetch? (y/[N]): ").strip().lower()
+            if choice != 'y':
+                print("Using existing files. Proceeding to prediction...")
+            else:
+                print(f"Refetching data for the site {selectedSite['siteId']}...")
+                data = fetchEcoCounterSiteData(selectedSite["siteId"], selectedSite["domain"], 'hour')
+                storeSplitJson(data, site_id=selectedSite["siteId"])
+        else:
+                print(f"Fetching data for the site {selectedSite['siteId']}...")
+                data = fetchEcoCounterSiteData(selectedSite["siteId"], selectedSite["domain"], 'hour')
+                storeSplitJson(data, site_id=selectedSite["siteId"])
+        predictPedestrianCountAtTimeRange(selectedSite, DEFAULT_TEST_DATE_START, DEFAULT_TEST_DATE_END, model=DEFAULT_MODEL)
+    except Exception as e:
+        print(f"An error occurred: {e}")
+   
 if __name__ == "__main__":
     main()

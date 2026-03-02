@@ -95,8 +95,8 @@ class FMIWeatherFetcher:
 
 if __name__ == "__main__":
     # Setup directories
-    base_dir = Path(__file__).parent
-    output_dir = base_dir / "data"
+    base_dir = Path(__file__).parent.parent
+    output_dir = base_dir / "data" / "weather" / "default"
     output_dir.mkdir(parents=True, exist_ok=True)
     file_path = output_dir / "weather_forecast.json"
 
