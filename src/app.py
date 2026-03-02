@@ -6,12 +6,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
 
 # INSTRUCTIONS
 #
+# DEFAULT_MODEL
+DEFAULT_MODEL = 1  # 1 for  Random Forest (more accurate but slower), 2 for for Linear Regression
 #
 # 1. SET THESE TWO TO THE DATE TIME RANGE YOU WANT TO PREDICT FOR 
 # 2. AND JUST RUN THE APP.PY TO SEE THE PREDICTIONS AND GRAPH
@@ -21,13 +24,13 @@ from forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
 # ENSURE THE FORMAT IS "YYYY-MM-DD HH:MM:SS" AND THE TIMEZONE IS LOCAL (Europe/Helsinki)
 
 # FOR A FULL DAY START WITH MIDNIGHT AND END WITH MIDNIGHT OF THE NEXT DAY, OTHERWISE THE LAST HOUR MAY BE CUT OFF IN THE GRAPH (BECAUSE OF HOURLY ALIGNMENT)
-TEST_DATE_START = "2026-03-02 00:00:00"
+TEST_DATE_START = "2026-03-05 00:00:00"
 
-TEST_DATE_END = "2026-03-03 00:00:00"
+TEST_DATE_END = "2026-03-06 00:00:00"
 
-#TEST_DATE_START = "2026-03-02 00:00:00"
+#TEST_DATE_START = "2026-03-05 00:00:00"
 
-#TEST_DATE_END = "2026-03-02 23:59:00"
+#TEST_DATE_END = "2026-03-06 00:00:00"
 
 # DO NOT TOUCH BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
 #
@@ -35,7 +38,7 @@ TEST_DATE_END = "2026-03-03 00:00:00"
 # OLD HARDCODED TEST VALUES (FOR QUICK TESTING WITHOUT FORECAST)
 TEST_TEMPERATURE = -20
 
-TEST_SITE_NAME = "Ouluhalli"  # site id 100000647 at "Oulu_kaupunki" Domain
+TEST_SITE_NAME = "Kempele/Asemantie" 
 
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent
@@ -173,7 +176,7 @@ def time_based_split(df: pd.DataFrame, ts_col: str = "ts_hour", train_ratio: flo
 
 
 # Baseline model: linear regression on temperature + time features
-def processData():
+def processDataWithLinearRegression():
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
     train_df = load_pedestrians(TRAINING_PEDESTRIAN_JSON_PATH)
     train_weather_df = load_weather(TRAINING_HISTORICAL_WEATHER_PATH)
@@ -217,10 +220,64 @@ def processData():
 
    
     return model, featureColumns, coef, model.intercept_
+
+# Model: Random Forest regression on temperature + time features
+def processDataWithRandomForestRegression():
+    """Loads data, trains a Random Forest regressor, evaluates, and shows feature importances."""
+    train_df = load_pedestrians(TRAINING_PEDESTRIAN_JSON_PATH)
+    train_weather_df = load_weather(TRAINING_HISTORICAL_WEATHER_PATH)
+ 
+
+    test_df = load_pedestrians(TESTING_PEDESTRIAN_JSON_PATH)
+    test_weather_df = load_weather(TESTING_HISTORICAL_WEATHER_PATH)
+
+       # Join on hourly timestamp
+    train_merged = train_df.merge(train_weather_df, on="ts_hour", how="inner")
+    test_merged = test_df.merge(test_weather_df, on="ts_hour", how="inner")
+
+    # Add features
+    train_merged = add_time_features(train_merged, "ts_hour")
+    test_merged = add_time_features(test_merged, "ts_hour")
+
+    # --- Baseline features: temperature + time/date features ---
+    featureColumns = ["temp_c", "month", "weekday", "is_weekend", "hour_sin", "hour_cos"]
+    target_col = "pedestrians"
+
+    X_train = train_merged[featureColumns]
+    y_train = train_merged[target_col]
+
+    X_test = test_merged[featureColumns]
+    y_test = test_merged[target_col]
+
+    model = RandomForestRegressor(
+        n_estimators=300,
+        random_state=42,
+        n_jobs=-1
+    )
+    model.fit(X_train, y_train)
+
+    # Evaluate
+    y_pred = model.predict(X_test)
+    print("Rows used (after merge):", len(train_merged) + len(test_merged))
+    print("MAE:", mean_absolute_error(y_test, y_pred))
+    print("MSE:", mean_squared_error(y_test, y_pred))
+
+    # Show feature importances (interpretation)
+    coef = pd.Series(model.feature_importances_, index=featureColumns).sort_values(ascending=False)
+    print("\nFeature importances:")
+    print(coef)
+    intercept = None
+
+   
+    return model, featureColumns, coef, intercept
 # Baseline model: linear regression on temperature + time features
-def predictPedestrianCountAtHourWithTemp(requestedTime=TEST_DATE_START, requestedTemperature=TEST_TEMPERATURE):
+def predictPedestrianCountAtHourWithTemp(requestedTime=TEST_DATE_START, requestedTemperature=TEST_TEMPERATURE, model    =DEFAULT_MODEL):
     """Loads data, trains a simple linear regression baseline, evaluates, and shows coefficients."""
-    model, featureColumns, coef, intercept = processData()
+    if model == 1:
+        model, featureColumns, coef, intercept = processDataWithRandomForestRegression()
+    else:
+       
+        model, featureColumns, coef, intercept = processDataWithLinearRegression()
 
      # --- Example: predict for a chosen time + temperature ---
     # Suppose user asks: "At 2026-02-21 15:00 local time and temp is -7.0, how many pedestrians?"
@@ -295,12 +352,16 @@ def visualize_predictions(query_df: pd.DataFrame, title: str = "Pedestrian Count
     
     plt.show()
 
-def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE_START, endDateTime=TEST_DATE_END, requestedTemperature=TEST_TEMPERATURE):
+def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE_START, endDateTime=TEST_DATE_END, requestedTemperature=TEST_TEMPERATURE, model=1):
     """Placeholder for future prediction code over a date range."""
    
 
     # First train the model on the historical data 
-    model, featureColumns, coef, intercept = processData()
+    if model == 1:
+        model, featureColumns, coef, intercept = processDataWithRandomForestRegression()
+    else:
+        model, featureColumns, coef, intercept = processDataWithLinearRegression()
+        
 
     # Then create a DataFrame for the requested date range and temperature, and predict pedestrian counts for each hour in that range
     date_range = pd.date_range(start=startDateTime, end=endDateTime, freq="h", tz=LOCAL_TZ)
@@ -316,14 +377,17 @@ def predictPedestrianCountAtTimeRangeWithTemp(startDateTime=TEST_DATE_START, end
     
 
 
-def predictPedestrianCountAtTimeRange(startDateTime=TEST_DATE_START, endDateTime=TEST_DATE_END):
+def predictPedestrianCountAtTimeRange(startDateTime=TEST_DATE_START, endDateTime=TEST_DATE_END, model=DEFAULT_MODEL):
     """Predicts pedestrian counts over a date range using weather forecast data."""
     
     # Load the forecast
     forecast_df = load_weather(WEATHER_JSON_PATH)
 
     # First train the model on the historical data 
-    model, featureColumns, coef, intercept = processData()
+    if model == 1:
+        model, featureColumns, coef, intercept = processDataWithRandomForestRegression()
+    else:
+        model, featureColumns, coef, intercept = processDataWithLinearRegression()
 
     # Create a DataFrame for the requested date range
     date_range = pd.date_range(start=startDateTime, end=endDateTime, freq="h", tz=LOCAL_TZ)
@@ -371,6 +435,6 @@ def predictPedestrianCountAtTimeRange(startDateTime=TEST_DATE_START, endDateTime
 
 
 def main():
-    predictPedestrianCountAtTimeRange()
+    predictPedestrianCountAtTimeRange(TEST_DATE_START, TEST_DATE_END, model=DEFAULT_MODEL)
 if __name__ == "__main__":
     main()
