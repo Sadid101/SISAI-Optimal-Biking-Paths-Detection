@@ -107,10 +107,19 @@ def repair_nan_values():
             json.dump({"location": {"place": STATION_PLACE}, "rows": rows}, f, indent=2)
         print(f"💾 {folder}: Saved updated file.")
 
-def run_builder():
+def check_if_all_historical_weather_data_exists():
+    base_dir = WEATHER_DATA_BASE_PATH / "default"
+    trainingDataExists = (base_dir / "training" / "weather_train.json").exists()
+    validationDataExists = (base_dir / "validation" / "weather_val.json").exists()
+    testingDataExists = (base_dir / "testing" / "weather_test.json").exists()
+    return trainingDataExists and validationDataExists and testingDataExists
+
+
+        
+def run_builder(start_date: datetime = START_DATE, end_date: datetime = END_DATE):
     base_dir = WEATHER_DATA_BASE_PATH / "default"
     
-    if (base_dir / "training" / "weather_train.json").exists():
+    if (check_if_all_historical_weather_data_exists()):
         print("Existing data found.")
         print("1. Full Refetch (Delete and start over)")
         print("2. Repair NaNs (Keep existing, try to fill holes)")
@@ -124,11 +133,11 @@ def run_builder():
             return
 
     print("--- Starting Weather Data Build ---")
-    current_start = START_DATE
+    current_start = start_date
     all_chunks = []
 
-    while current_start < END_DATE:
-        current_end = min(current_start + timedelta(hours=168), END_DATE)
+    while current_start < end_date:
+        current_end = min(current_start + timedelta(hours=168), end_date)
         print(f" > Fetching: {current_start.strftime('%Y-%m-%d')} ...", end="\r")
         df_chunk = fetch_chunk(current_start, current_end)
         if not df_chunk.empty:

@@ -11,6 +11,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 from utils.forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation, fetchAndSaveForecast
 from utils.pedestrianDataFetcher import check_files_exist, fetchEcoCounterSiteData, getAndPrintListOfSites, storeSplitJson
+from utils.weather_dataset_builder import check_if_all_historical_weather_data_exists, run_builder
 
 # INSTRUCTIONS
 # JUST RUN THIS APP.PY AND FOLLOW THE PROMPTS IN THE CONSOLE.
@@ -399,7 +400,7 @@ def predictPedestrianCountAtTimeRangeWithTemp(site=None, startDateTime=DEFAULT_T
     
 
 
-def predictPedestrianCountAtTimeRange(site, startDateTime=DEFAULT_TEST_DATE_START, endDateTime=DEFAULT_TEST_DATE_END, model=DEFAULT_MODEL):
+def predictPedestrianCountAtTimeRange(site, startDateTime=DEFAULT_TEST_DATE_START, endDateTime=DEFAULT_TEST_DATE_END, model=DEFAULT_MODEL, saveJson=False):
     """Predicts pedestrian counts over a date range for given site using weather forecast data."""
     
     # Load the forecast
@@ -448,12 +449,12 @@ def predictPedestrianCountAtTimeRange(site, startDateTime=DEFAULT_TEST_DATE_STAR
     
     prediction_df = pd.DataFrame(predictions)
     
+    
     print(f"\nPredictions for {startDateTime} to {endDateTime} using weather forecast:")
     print(prediction_df[["ts_hour", "temp_c", "predicted_pedestrians"]])
     
-    # Visualize the predictions
-    visualize_predictions(prediction_df, 
-                         title=f"Pedestrian Predictions ({startDateTime} to {endDateTime}) at {site['name']}")
+   
+    return prediction_df
 def getSiteDetailsByIndex(site_index, sites_list):
     """Returns the site details from the sites list based on the provided index. The index is expected to be 0-based."""
     if 0 <= site_index < len(sites_list):
@@ -530,9 +531,36 @@ def promptForDate(promptMessage=DEFAULT_DATE_PROMPT,minDate=pd.Timestamp.now(tz=
             date = None
             print(f"Date must be on or before {maxDate}. Please try again.")
     return date
-
+def check_historica_weather_data_and_fetch_if_needed():
+    print("Checking for existing historical weather data...")
+    if check_if_all_historical_weather_data_exists():
+        print("Existing weather data found. No need to fetch.")
+        return True
+    else:
+        print("No existing weather data found. Preparing to fetch data...")
+        run_builder()
+def save_predictions_to_json(predictions_df: pd.DataFrame, site_id: str, startDateTime: pd.Timestamp, endDateTime: pd.Timestamp, path: str = "./results"):
+    """Saves prediction results to a JSON file at the specified path.
+    
+    Args:
+        predictions_df: DataFrame with prediction results
+        site_id: Site identifier
+        startDateTime: Start date of predictions
+        endDateTime: End date of predictions
+        path: Directory path where the file will be saved (default: current directory)
+    """
+    # Format timestamps to be filename-safe (remove colons and timezone info)
+    start_str = startDateTime.strftime("%Y-%m-%d_%H-%M-%S")
+    end_str = endDateTime.strftime("%Y-%m-%d_%H-%M-%S")
+    filename = f"predictions_{site_id}_{start_str}_{end_str}.json"
+    output_file = Path(path) / filename
+    output_file.parent.mkdir(parents=True, exist_ok=True)  # Create directory if it doesn't exist
+    predictions_df.to_json(output_file, orient="records", indent=2)
+    print(f"Saved predictions to {output_file}")
 def main():
     try:
+        
+
         # 1. Prompt user to select a start date and end date for the prediction (ensure the format is "YYYY-MM-DD HH:MM:SS" and the timezone is local, e.g., "2026-02-25 00:00:00")
         currentDate = pd.Timestamp.now(tz=LOCAL_TZ).floor("h")
         print(f"Current date and time: {currentDate}")
@@ -540,18 +568,33 @@ def main():
         maxDateForEnd = startDateTime + pd.Timedelta(days=7)  # Limit end date to 7 days after start date
         endDateTime = promptForDate(promptMessage="Enter an end date and time", minDate=startDateTime, maxDate=maxDateForEnd, defaultDate=startDateTime + pd.Timedelta(hours=24, minutes=0)  )
         print(f"Selected date range: {startDateTime} to {endDateTime}\n")
-        fetchAndSaveForecast()
-        # Get and print the list of sites,
+       
+        # 2.a Get and print the list of sites,
         sites = getAndPrintListOfSites()
-        # ask user to select one by number, and fetch data for that site
+        # 2.b ask user to select one by number, and fetch data for that site
         selectedSite = promptSiteSelection(sites)
         print(f"Fetching data for site ID: {selectedSite['siteId']}...")
     
-        # Check if files already exist for the selected site, if yes ask if user wants to refetch or use existing files
+        # 3. Check if files already exist for the selected site, if yes ask if user wants to refetch or use existing files
         checkForPedestrianDataAndPromptRefetch(selectedSite)
 
-        # Run the prediction for the selected site and the default test date range using the default model
-        predictPedestrianCountAtTimeRange(selectedSite, startDateTime, endDateTime, model=DEFAULT_MODEL)
+        # 4.a Ensure the historical weather data exists and fetch it if needed
+        check_historica_weather_data_and_fetch_if_needed()
+        # 4.b update weather forecast data before proceeding
+        fetchAndSaveForecast()
+
+        # 5. Run the prediction for the selected site and the default test date range using the default model
+        results = predictPedestrianCountAtTimeRange(selectedSite, startDateTime, endDateTime, model=DEFAULT_MODEL)
+
+        choice = input("Save the predicted results to a json? (y/[N]): ").strip().lower()
+        if choice == 'y':
+            save_predictions_to_json(results, selectedSite['siteId'], startDateTime, endDateTime)
+        else:
+            print("Skipping saving to JSON.")
+        # Visualize the predictions
+        visualize_predictions(results, 
+                         title=f"Pedestrian Predictions ({startDateTime} to {endDateTime}) at {selectedSite['name']}")
+            
     except Exception as e:
         print(f"An error occurred: {e}")
    

@@ -5,3 +5,4 @@ __pycache__
 .venv
 src/data/pedestrians/sites/*
 src/data/weather/sites/*
+src/results/*
