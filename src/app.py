@@ -455,40 +455,100 @@ def predictPedestrianCountAtTimeRange(site, startDateTime=DEFAULT_TEST_DATE_STAR
     visualize_predictions(prediction_df, 
                          title=f"Pedestrian Predictions ({startDateTime} to {endDateTime}) at {site['name']}")
 def getSiteDetailsByIndex(site_index, sites_list):
+    """Returns the site details from the sites list based on the provided index. The index is expected to be 0-based."""
     if 0 <= site_index < len(sites_list):
         return sites_list[site_index]
     return None
 
+def promptSiteSelection(sites):
+    """Prompts the user to select a site by number from the list of sites."""
+    selectedSite = None
+     # Keep asking until a valid site number is entered
+    while(selectedSite is None):
+    # Ask for the user to input a site number from the list of sites printed above
+        siteNumber = input("Enter the site number you want to fetch data for (Default: 1): ").strip()
+        if(siteNumber == ""):
+            print("No site number entered. Defaulting to site number 1 (Kempele/Asemantie)...")
+            siteNumber = 1
+        selectedSite = getSiteDetailsByIndex(int(siteNumber) - 1, sites)
+        if not selectedSite or selectedSite["siteId"] is None:
+            print(f"Number {siteNumber} not found. Please check the list and try again.\n")
+            continue
+    return selectedSite
+
+def checkForPedestrianDataAndPromptRefetch(site):
+    """Checks if pedestrian data files already exist for the given site. If they do, prompts the user to decide whether to refetch the data or use existing files.
+    """
+    if check_files_exist(site["siteId"]):
+        choice = input(f"Pedestrian files already exist for the requested site number {site['siteId']}. Do you want to refetch? (y/[N]): ").strip().lower()
+        if choice != 'y':
+            print("Using existing files. Proceeding to prediction...")
+        else:
+            print(f"Refetching data for the site {site['siteId']}...")
+            data = fetchEcoCounterSiteData(site["siteId"], site["domain"], 'hour')
+            storeSplitJson(data, site_id=site["siteId"])
+    else:
+        print(f"Fetching data for the site {site['siteId']}...")
+        data = fetchEcoCounterSiteData(site["siteId"], site["domain"], 'hour')
+        storeSplitJson(data, site_id=site["siteId"])
+
+DEFAULT_DATE_PROMPT = "Enter the date and time"
+def promptForDate(promptMessage=DEFAULT_DATE_PROMPT,minDate=pd.Timestamp.now(tz=LOCAL_TZ).floor("h"), maxDate=None, defaultDate=pd.Timestamp.now(tz=LOCAL_TZ).floor("h")):
+    """Prompts the user to enter a date and time in the format 'YYYY-MM-DD HH:MM:SS' (local timezone). Validates the input and ensures it falls within the specified min and max date range if provided. If the user presses enter without inputting a date, it defaults to minDate + 24 hours if minDate is provided."""
+    date = None
+    while(date is None):
+        dateInput = input(f"{promptMessage} \n(Default: {defaultDate}, format: 'YYYY-MM-DD HH:MM:SS', local timezone): ").strip()
+        try:
+            #default to end of minDate if user just presses enter without inputting a date
+            if(dateInput == ""):
+                if minDate:
+                    date = defaultDate
+                    return date
+                else:
+                    print("No date entered and no minimum date to default to. Please enter a valid date.")
+                    continue
+            dateSplit = dateInput.split(" ")
+            print("dateSplit", dateSplit)
+            print("Length of dateSplit:", len(dateSplit))
+            # fill out the time part with zeroes if the user only inputs a date without time
+            if dateSplit and len(dateSplit) == 1:
+                print("No time part detected in the input. Assuming 22:00:00+02:00 for the time...")
+                dateInput += " 22:00:00+02:00"  # Append time and timezone info
+            print("dateInput after processing:", dateInput)
+            date = pd.to_datetime(dateInput)
+        except ValueError:
+            date = None
+            print("Invalid date format. Please ensure the format is 'YYYY-MM-DD HH:MM:SS'.")
+            continue
+        # Check if date is within the specified range        
+        if minDate and date < minDate:
+            date = None
+            print(f"Date must be after {minDate}. Please try again.")
+        if maxDate and date > maxDate:
+            date = None
+            print(f"Date must be before {maxDate}. Please try again.")
+    return date
+
 def main():
     try:
-        # Get and print the list of sites, ask user to select one by number, and fetch data for that site
+        # 1. Prompt user to select a start date and end date for the prediction (ensure the format is "YYYY-MM-DD HH:MM:SS" and the timezone is local, e.g., "2026-02-25 00:00:00")
+        currentDate = pd.Timestamp.now(tz=LOCAL_TZ).floor("h")
+        print(f"Current date and time: {currentDate}")
+        startDateTime = promptForDate(promptMessage="Enter a start date and time", minDate=currentDate)
+        
+        endDateTime = promptForDate(promptMessage="Enter an end date and time", minDate=startDateTime, maxDate=None, defaultDate=startDateTime + pd.Timedelta(hours=24, minutes=0)  )
+        print(f"Selected date range: {startDateTime} to {endDateTime}\n")
+        # Get and print the list of sites,
         sites = getAndPrintListOfSites()
-        selectedSite = None
-
-        # Keep asking until a valid site number is entered
-        while(selectedSite is None):
-        # Ask for the user to input a site number from the list of sites printed above
-            siteNumber = input("Enter the site number you want to fetch data for: ").strip()
-            selectedSite = getSiteDetailsByIndex(int(siteNumber) - 1, sites)
-            if not selectedSite or selectedSite["siteId"] is None:
-                print(f"Number {siteNumber} not found. Please check the list and try again.\n")
-                continue
+        # ask user to select one by number, and fetch data for that site
+        selectedSite = promptSiteSelection(sites)
         print(f"Fetching data for site ID: {selectedSite['siteId']}...")
     
         # Check if files already exist for the selected site, if yes ask if user wants to refetch or use existing files
-        if check_files_exist(selectedSite["siteId"]):
-            choice = input(f"Pedestrian files already exist for the requested site number {selectedSite['siteId']}. Do you want to refetch? (y/[N]): ").strip().lower()
-            if choice != 'y':
-                print("Using existing files. Proceeding to prediction...")
-            else:
-                print(f"Refetching data for the site {selectedSite['siteId']}...")
-                data = fetchEcoCounterSiteData(selectedSite["siteId"], selectedSite["domain"], 'hour')
-                storeSplitJson(data, site_id=selectedSite["siteId"])
-        else:
-                print(f"Fetching data for the site {selectedSite['siteId']}...")
-                data = fetchEcoCounterSiteData(selectedSite["siteId"], selectedSite["domain"], 'hour')
-                storeSplitJson(data, site_id=selectedSite["siteId"])
-        predictPedestrianCountAtTimeRange(selectedSite, DEFAULT_TEST_DATE_START, DEFAULT_TEST_DATE_END, model=DEFAULT_MODEL)
+        checkForPedestrianDataAndPromptRefetch(selectedSite)
+
+        # Run the prediction for the selected site and the default test date range using the default model
+        predictPedestrianCountAtTimeRange(selectedSite, startDateTime, endDateTime, model=DEFAULT_MODEL)
     except Exception as e:
         print(f"An error occurred: {e}")
    
