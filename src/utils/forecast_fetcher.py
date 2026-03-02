@@ -92,8 +92,8 @@ class FMIWeatherFetcher:
             "location": {"place": location.place} if location.place else {"latlon": location.latlon},
             "rows": rows
         }
-
-if __name__ == "__main__":
+    
+def fetchAndSaveForecast():
     # Setup directories
     base_dir = Path(__file__).parent.parent
     output_dir = base_dir / "data" / "weather" / "default"
@@ -124,3 +124,5 @@ if __name__ == "__main__":
             
     except Exception as e:
         print(f"Error occurred: {e}")
+if __name__ == "__main__":
+    fetchAndSaveForecast()

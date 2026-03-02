@@ -9,7 +9,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-from utils.forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation
+from utils.forecast_fetcher import FMIWeatherFetcher, FMIQueryLocation, fetchAndSaveForecast
 from utils.pedestrianDataFetcher import check_files_exist, fetchEcoCounterSiteData, getAndPrintListOfSites, storeSplitJson
 
 # INSTRUCTIONS
@@ -480,7 +480,7 @@ def checkForPedestrianDataAndPromptRefetch(site):
     """Checks if pedestrian data files already exist for the given site. If they do, prompts the user to decide whether to refetch the data or use existing files.
     """
     if check_files_exist(site["siteId"]):
-        choice = input(f"Pedestrian files already exist for the requested site number {site['siteId']}. Do you want to refetch? (y/[N]): ").strip().lower()
+        choice = input(f"Pedestrian files already exist for the requested site {site['name']} ({site['siteId']}). Do you want to refetch? (y/[N]): ").strip().lower()
         if choice != 'y':
             print("Using existing files. Proceeding to prediction...")
         else:
@@ -535,9 +535,10 @@ def main():
         currentDate = pd.Timestamp.now(tz=LOCAL_TZ).floor("h")
         print(f"Current date and time: {currentDate}")
         startDateTime = promptForDate(promptMessage="Enter a start date and time", minDate=currentDate)
-        
-        endDateTime = promptForDate(promptMessage="Enter an end date and time", minDate=startDateTime, maxDate=None, defaultDate=startDateTime + pd.Timedelta(hours=24, minutes=0)  )
+        maxDateForEnd = startDateTime + pd.Timedelta(days=7)  # Limit end date to 7 days after start date
+        endDateTime = promptForDate(promptMessage="Enter an end date and time", minDate=startDateTime, maxDate=maxDateForEnd, defaultDate=startDateTime + pd.Timedelta(hours=24, minutes=0)  )
         print(f"Selected date range: {startDateTime} to {endDateTime}\n")
+        fetchAndSaveForecast()
         # Get and print the list of sites,
         sites = getAndPrintListOfSites()
         # ask user to select one by number, and fetch data for that site
