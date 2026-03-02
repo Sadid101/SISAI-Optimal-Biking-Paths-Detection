@@ -493,29 +493,31 @@ def checkForPedestrianDataAndPromptRefetch(site):
         storeSplitJson(data, site_id=site["siteId"])
 
 DEFAULT_DATE_PROMPT = "Enter the date and time"
-def promptForDate(promptMessage=DEFAULT_DATE_PROMPT,minDate=pd.Timestamp.now(tz=LOCAL_TZ).floor("h"), maxDate=None, defaultDate=pd.Timestamp.now(tz=LOCAL_TZ).floor("h")):
-    """Prompts the user to enter a date and time in the format 'YYYY-MM-DD HH:MM:SS' (local timezone). Validates the input and ensures it falls within the specified min and max date range if provided. If the user presses enter without inputting a date, it defaults to minDate + 24 hours if minDate is provided."""
+def promptForDate(promptMessage=DEFAULT_DATE_PROMPT,minDate=pd.Timestamp.now(tz=LOCAL_TZ).floor("h"), maxDate=None, defaultDate=pd.Timestamp.now(tz=LOCAL_TZ).floor("d") + pd.Timedelta(hours=24, minutes=0)):
+    """Prompts the user to enter a date and time in the format 'YYYY-MM-DD HH:MM:SS' (Helsinki timezone, UTC+2). Validates the input and ensures it falls within the specified min and max date range if provided. If the user presses enter without inputting a date, it defaults to the provided defaultDate."""
     date = None
     while(date is None):
-        dateInput = input(f"{promptMessage} \n(Default: {defaultDate}, format: 'YYYY-MM-DD HH:MM:SS', local timezone): ").strip()
+        dateInput = input(f"{promptMessage} \n(Default: {defaultDate}, format: 'YYYY-MM-DD HH:MM:SS', timezone: Helsinki UTC+2): ").strip()
         try:
-            #default to end of minDate if user just presses enter without inputting a date
+            #default to provided defaultDate if user just presses enter without inputting a date
             if(dateInput == ""):
-                if minDate:
+                if defaultDate is not None:
                     date = defaultDate
                     return date
                 else:
-                    print("No date entered and no minimum date to default to. Please enter a valid date.")
+                    print("No date entered and no default date provided. Please enter a valid date.")
                     continue
             dateSplit = dateInput.split(" ")
-            print("dateSplit", dateSplit)
-            print("Length of dateSplit:", len(dateSplit))
-            # fill out the time part with zeroes if the user only inputs a date without time
+            # fill out the time part if the user only inputs a date without time
             if dateSplit and len(dateSplit) == 1:
-                print("No time part detected in the input. Assuming 22:00:00+02:00 for the time...")
-                dateInput += " 22:00:00+02:00"  # Append time and timezone info
-            print("dateInput after processing:", dateInput)
+                print("No time part detected in the input. Assuming 00:00:00 for the time...")
+                dateInput += " 00:00:00"  # Append default time
+            
+            # Parse the naive datetime string and localize it to Helsinki timezone
             date = pd.to_datetime(dateInput)
+            # Localize naive datetime to Helsinki timezone (Europe/Helsinki)
+            if date.tz is None:
+                date = date.tz_localize(LOCAL_TZ)
         except ValueError:
             date = None
             print("Invalid date format. Please ensure the format is 'YYYY-MM-DD HH:MM:SS'.")
@@ -523,10 +525,10 @@ def promptForDate(promptMessage=DEFAULT_DATE_PROMPT,minDate=pd.Timestamp.now(tz=
         # Check if date is within the specified range        
         if minDate and date < minDate:
             date = None
-            print(f"Date must be after {minDate}. Please try again.")
+            print(f"Date must be on or after {minDate}. Please try again.")
         if maxDate and date > maxDate:
             date = None
-            print(f"Date must be before {maxDate}. Please try again.")
+            print(f"Date must be on or before {maxDate}. Please try again.")
     return date
 
 def main():
