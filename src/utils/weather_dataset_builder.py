@@ -14,6 +14,9 @@ DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 FMI_WFS_BASE = "https://opendata.fmi.fi/wfs"
 OBS_STORED_QUERY = "fmi::observations::weather::timevaluepair"
 PARAM_MAP = {"t2m": "temp_c"} 
+# Get the root parent directory
+ROOT_PARENT_FOLDER = Path(__file__).parent.parent
+WEATHER_DATA_BASE_PATH = ROOT_PARENT_FOLDER / "data" / "weather"
 
 def fetch_chunk(starttime: datetime, endtime: datetime) -> pd.DataFrame:
     params = {
@@ -60,7 +63,7 @@ def fetch_chunk(starttime: datetime, endtime: datetime) -> pd.DataFrame:
 
 def repair_nan_values():
     """Finds NaN values in existing JSONs and tries to refetch them."""
-    base_dir = Path(__file__).parent / "data"
+    base_dir = WEATHER_DATA_BASE_PATH / "default"
     folders = ["training", "validation", "testing"]
     
     print("--- Starting Weather Data Repair ---")
@@ -104,10 +107,19 @@ def repair_nan_values():
             json.dump({"location": {"place": STATION_PLACE}, "rows": rows}, f, indent=2)
         print(f"💾 {folder}: Saved updated file.")
 
-def run_builder():
-    base_dir = Path(__file__).parent / "data"
+def check_if_all_historical_weather_data_exists():
+    base_dir = WEATHER_DATA_BASE_PATH / "default"
+    trainingDataExists = (base_dir / "training" / "weather_train.json").exists()
+    validationDataExists = (base_dir / "validation" / "weather_val.json").exists()
+    testingDataExists = (base_dir / "testing" / "weather_test.json").exists()
+    return trainingDataExists and validationDataExists and testingDataExists
+
+
+        
+def run_builder(start_date: datetime = START_DATE, end_date: datetime = END_DATE):
+    base_dir = WEATHER_DATA_BASE_PATH / "default"
     
-    if (base_dir / "training" / "weather_train.json").exists():
+    if (check_if_all_historical_weather_data_exists()):
         print("Existing data found.")
         print("1. Full Refetch (Delete and start over)")
         print("2. Repair NaNs (Keep existing, try to fill holes)")
@@ -121,11 +133,11 @@ def run_builder():
             return
 
     print("--- Starting Weather Data Build ---")
-    current_start = START_DATE
+    current_start = start_date
     all_chunks = []
 
-    while current_start < END_DATE:
-        current_end = min(current_start + timedelta(hours=168), END_DATE)
+    while current_start < end_date:
+        current_end = min(current_start + timedelta(hours=168), end_date)
         print(f" > Fetching: {current_start.strftime('%Y-%m-%d')} ...", end="\r")
         df_chunk = fetch_chunk(current_start, current_end)
         if not df_chunk.empty:

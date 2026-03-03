@@ -3,3 +3,6 @@ __pycache__
 .learn
 .vscode
 .venv
+src/data/pedestrians/sites/*
+src/data/weather/sites/*
+src/results/*
