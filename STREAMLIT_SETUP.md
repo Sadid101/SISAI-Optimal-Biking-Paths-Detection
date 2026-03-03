@@ -2,15 +2,19 @@
 
 ## Quick Start (5 minutes)
 
+### Step 0: Ensure you have checked the main README and have the prerequisites set up (Python, Pip)
+
 ### Step 1: Install Additional Dependencies
 
 Open PowerShell in your project root directory and run:
 
-```powershell
+```Windows (powershell) or Macos (terminal)
 python -m pip install -r requirements.txt
+
 ```
 
 This installs:
+
 - `streamlit` - Web UI framework
 - `plotly` - Interactive charts
 - `openpyxl` - Excel export support
@@ -19,11 +23,16 @@ This installs:
 
 From the project root directory, run:
 
-```powershell
+```Windows (powershell) or Macos (terminal)
 streamlit run src/streamlit_app.py
+
+OR alternatively directly with python:
+python3 -m streamlit run src/streamlit_app.py
+
 ```
 
 **Expected Output:**
+
 ```
   You can now view your Streamlit app in your browser.
 
@@ -40,6 +49,7 @@ Automatically opens at `http://localhost:8501` or manually visit that URL
 ## 🎯 What You'll See
 
 ### Left Sidebar
+
 - **📍 Location Selection** - Search and select from 47 sensor sites
 - **📅 Date Range** - Pick dates up to 7 days in advance
 - **⏰ Time Selection** - Choose start/end times (hourly)
@@ -47,6 +57,7 @@ Automatically opens at `http://localhost:8501` or manually visit that URL
 - **🔮 Generate Predictions** - Click to run the analysis
 
 ### Main Area
+
 Once you click "Generate Predictions", you'll see:
 
 1. **📊 Summary Statistics**
@@ -76,25 +87,33 @@ Once you click "Generate Predictions", you'll see:
 ## 🔧 Troubleshooting
 
 ### Issue: "Module not found: streamlit"
+
 **Solution:**
+
 ```powershell
 python -m pip install streamlit plotly
 ```
 
 ### Issue: "port 8501 already in use"
+
 **Solution:** Use a different port
+
 ```powershell
 streamlit run src/streamlit_app.py --server.port 8502
 ```
 
 ### Issue: "Data not found" error
+
 **Solutions:**
+
 - The app will automatically fetch missing data when you click "Generate Predictions"
 - Ensure internet connection for API calls
 - Check that `rawData/` and `src/data/` directories exist
 
 ### Issue: "Chart not displaying"
+
 **Solution:** Ensure plotly is installed
+
 ```powershell
 python -m pip install plotly --upgrade
 ```
@@ -117,7 +136,9 @@ python -m pip install plotly --upgrade
 ## 🎨 Customization Options
 
 ### Change Default Model
+
 Edit `streamlit_app.py` line with:
+
 ```python
 model_type = st.radio(
     "Choose prediction model:",
@@ -127,14 +148,18 @@ model_type = st.radio(
 ```
 
 ### Adjust Chart Colors
+
 In `streamlit_app.py`, modify chart colors:
+
 ```python
 line=dict(color='#1f77b4', width=2),  # Blue for pedestrians
 line=dict(color='#ff7f0e', width=2, dash='dash'),  # Orange for temperature
 ```
 
 ### Change Max Date Range
+
 In `streamlit_app.py`:
+
 ```python
 max_date = min_date + timedelta(days=14)  # Change 7 to 14 for 2 weeks
 ```
@@ -226,6 +251,6 @@ If you encounter issues:
 
 ---
 
-**Happy Predicting! 🚶📊** 
+**Happy Predicting! 🚶📊**
 
 Created for SISAI Final Project - Optimal Biking Paths Detection
