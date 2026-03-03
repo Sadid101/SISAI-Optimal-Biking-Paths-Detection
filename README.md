@@ -10,7 +10,7 @@ The system utilizes a Random Forest regression model to analyze how environmenta
 ## Environment Setup
 
 ### Prerequisites
-* **Python 3.8+**
+* Python 3.8+
 * Git
 * Internet connection (for fetching API data)
 * A virtual environment is highly recommended to keep dependencies isolated.
